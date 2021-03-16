@@ -1,9 +1,9 @@
 namespace ENPS.DTOs
 {
-    public class COF_EstadoDTO
+    public class CAD_CNPJDTO
     {
         public int Id { get; set; }
 
-        public string Nome { get; set; }
+        public string CNPJ { get; set; }
     }
 }
