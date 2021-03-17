@@ -4,7 +4,8 @@ namespace ENPS.DTOs
 {
     public class CAD_EmpresaDTO
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
+        public bool Ativo { get; set; }
         public string Fantasia { get; set; }
         public string RazaoSocial { get; set; }
         public CAD_CNPJDTO cAD_CNPJDTO { get; set; }

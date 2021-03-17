@@ -3,6 +3,7 @@ namespace ENPS.DTOs
     public class CAD_EnderecoDTO
     {
         public int Id { get; set; }
+        public bool Ativo { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }
         public string Numero { get; set; }

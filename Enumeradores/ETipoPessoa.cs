@@ -1,6 +1,6 @@
 namespace ENPS.Enumeradores
 {
-    public enum TipoPessoa
+    public enum ETipoPessoa
     {
         Fisica = 1,
         Juridica = 2

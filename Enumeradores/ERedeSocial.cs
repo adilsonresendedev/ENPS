@@ -1,6 +1,6 @@
 namespace ENPS.Enumeradores
 {
-    public enum RedeSocial
+    public enum ERedeSocial
     {
         Facebook = 1,
         Instagram = 2,
