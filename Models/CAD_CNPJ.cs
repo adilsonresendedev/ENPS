@@ -1,6 +1,6 @@
-namespace ENPS.DTOs
+namespace ENPS.Models
 {
-    public class CAD_CNPJDTO
+    public class CAD_CNPJ
     {
         public int Id { get; set; }
         public string CNPJ { get; set; }

@@ -1,6 +1,6 @@
-namespace ENPS.DTOs
+namespace ENPS.Models
 {
-    public class COF_EstadoDTO
+    public class Pais
     {
         public int Id { get; set; }
         public bool Ativo { get; set; }

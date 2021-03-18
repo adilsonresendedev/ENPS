@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "l/Lwdjene0EV65UQHqaswXbeyJbclOMXCeyNrCo+6c69DSl4LsPZm5PPA3uoOsAjNF5XmpkoFVvZwJt9UaX7eg==",
+  "dgSpecHash": "U3gJkvOSz8gPNW58kfw2FurNvV1BFBxMC93X18KMaNaMYjUI8nwo10ZqwCXCdZ4ArdfdlAuB/PicIQI+EVV4ng==",
   "success": true,
   "projectFilePath": "D:\\GIT\\ENPS\\ENPS.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Adilson\\.nuget\\packages\\fluentvalidation\\9.5.3\\fluentvalidation.9.5.3.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",

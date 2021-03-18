@@ -1,8 +1,8 @@
 using ENPS.Enumeradores;
 
-namespace ENPS.DTOs
+namespace ENPS.Models
 {
-    public class CAD_RedeSocialDTO
+    public class CAD_RedeSocial
     {
         public int Id { get; set; }
         public bool Ativo { get; set; }

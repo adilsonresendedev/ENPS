@@ -1,19 +1,19 @@
+using System.Collections.Generic;
 using System;
 
-namespace ENPS.DTOs
+namespace ENPS.Models
 {
-    public class CAD_PesquisaNPSDTO
+    public class NPS_Pesquisa
     {
         public int Id { get; set; }
         public bool Ativo { get; set; }
-        public int IdEnpresa { get; set; }
+        public CAD_Empresa cAD_EmpresaDTO { get; set; }
         public int IdOperador { get; set; }
         public string Descricao { get; set; }
         public int NotaMinima { get; set; }
         public int NotaMaxima { get; set; }
-        public string LinkPesquisa { get; set; }
         public DateTime DataAbertura { get; set; }
         public DateTime DataFechamento { get; set; }
-
+        public List<NPS_votacao> nPS_votacaoDTOs { get; set; }
     }
 }
