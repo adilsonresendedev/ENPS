@@ -31,7 +31,19 @@ namespace ENPS.Controllers
                 return BadRequest(_ServiceResponseCAD_usuarioDTO.Message);
             }
 
-            return Ok(_ServiceResponseCAD_usuarioDTO);
+            return Ok(_ServiceResponseCAD_usuarioDTO.Message);
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult> Login(CAD_usuarioDTO cAD_usuarioDTO)
+        {
+            _ServiceResponse<string> _serviceResponse = await _iAutorizacaoService.Login(cAD_usuarioDTO);
+            if (!_serviceResponse.Success)
+            {
+                return BadRequest(_serviceResponse);
+            }
+
+            return Ok(_serviceResponse);
         }
     }
 }

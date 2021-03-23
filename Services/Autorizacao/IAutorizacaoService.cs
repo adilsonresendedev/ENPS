@@ -8,7 +8,7 @@ namespace ENPS.Services.Autorizacao
     {
          Task<_ServiceResponse<CAD_usuarioDTO>> Registrar (CAD_usuarioDTO cAD_usuarioDTO);
 
-         Task<_ServiceResponse<string>> Logar (string nome, string senha);
+         Task<_ServiceResponse<string>> Login (CAD_usuarioDTO cAD_usuarioDTO);
 
          Task<_ServiceResponse<bool>> Validar(CAD_usuarioDTO cAD_usuarioDTO);
     }

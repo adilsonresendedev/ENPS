@@ -1,4 +1,4 @@
-namespace DOTNET_RPG.Util
+namespace ENPS.Util
 {
     public static class SenhaHashUtil
     {

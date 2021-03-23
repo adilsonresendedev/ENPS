@@ -3,24 +3,72 @@ using ENPS.Models;
 using ENPS.Mensagens;
 using System;
 using System.Threading.Tasks;
-
-using DOTNET_RPG.Util;
+using System.Linq;
 using FluentValidation.Results;
 using ENPS.Validadores;
+using System.Collections.Generic;
+using ENPS.Util;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace ENPS.Services.Autorizacao
 {
     public class AutorizacaoService : IAutorizacaoService
     {
+        private List<CAD_Usuario> cAD_Usuarios = new List<CAD_Usuario>()
+        {
+            new CAD_Usuario{cAD_PessoaDTO = new CAD_Pessoa{ Nome = "Usuario1" }, Senha = "1234", cAD_email = new CAD_email{ Email = "email1@email" }},
+            new CAD_Usuario{cAD_PessoaDTO = new CAD_Pessoa{ Nome = "Usuario2" }, Senha = "4321", cAD_email = new CAD_email{ Email = "email2@email" }}
+        };
+        private readonly IConfiguration _iConfiguration;
+        public AutorizacaoService(IConfiguration iConfiguration)
+        {
+            _iConfiguration = iConfiguration;
+            cAD_Usuarios.ForEach( x=> 
+            {
+                SenhaHashUtil.CriarSenhaHash(x.Senha, out byte[] senhaHash, out byte[] senhaSalt);
+                x.SenhaHash = senhaHash;
+                x.SenhaSalt = senhaSalt;
+            });
+        }
+
         private async Task<bool> Existe(CAD_usuarioDTO cAD_usuarioDTO)
         {
             await Task.Delay(100);
             return false;
         }
 
-        public Task<_ServiceResponse<string>> Logar(string nome, string senha)
+        public async Task<_ServiceResponse<string>> Login(CAD_usuarioDTO cAD_usuarioDTO)
         {
-            throw new System.NotImplementedException();
+            _ServiceResponse<string> _serviceResponse = new _ServiceResponse<string>();
+            try
+            {
+                CAD_Usuario cAD_Usuario = cAD_Usuarios.FirstOrDefault(x => x.cAD_email.Email == cAD_usuarioDTO.Email);
+                if (cAD_Usuario.Equals(null))
+                {
+                    _serviceResponse.Success = false;
+                    _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
+                    return _serviceResponse;
+                }
+                else if (!VerificarPasswordHash(cAD_usuarioDTO.Senha, cAD_Usuario.SenhaHash, cAD_Usuario.SenhaSalt))
+                {
+                    _serviceResponse.Success = false;
+                    _serviceResponse.Message = UsuarioMensagem.SenhaInvalida();
+                    return _serviceResponse;
+                }
+
+                _serviceResponse.Data = CreateToken(cAD_usuarioDTO);
+            }
+            catch (Exception ex)
+            {
+                _serviceResponse.Success = false;
+                _serviceResponse.Message = ex.Message;
+            }
+
+            return _serviceResponse;
         }
 
         public async Task<_ServiceResponse<CAD_usuarioDTO>> Registrar(CAD_usuarioDTO cAD_usuarioDTO)
@@ -31,7 +79,7 @@ namespace ENPS.Services.Autorizacao
                 if (await Existe(cAD_usuarioDTO))
                 {
                     _serviceResponse.Success = false;
-                    _serviceResponse.Message = Mensagem.UsuarioJaCadastrado();
+                    _serviceResponse.Message = UsuarioMensagem.UsuarioJaCadastrado();
                     return _serviceResponse;
                 }
 
@@ -40,7 +88,6 @@ namespace ENPS.Services.Autorizacao
                 cAD_usuarioDTO.SenhaSalt = senhaSalt;
 
                 _serviceResponse.Data = cAD_usuarioDTO;
-
                 return _serviceResponse;
             }
             catch (Exception ex)
@@ -50,7 +97,6 @@ namespace ENPS.Services.Autorizacao
                 return _serviceResponse;
             }
         }
-
 
         private bool VerificarPasswordHash(string senha, byte[] senhaHash, byte[] senhadSalt)
         {
@@ -69,6 +115,31 @@ namespace ENPS.Services.Autorizacao
             }
         }
 
+        private string CreateToken(CAD_usuarioDTO cAD_usuarioDTO)
+        {
+            List<Claim> claim = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, cAD_usuarioDTO.Id.ToString()),
+            };
+
+            SymmetricSecurityKey systemSecurityKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_iConfiguration.GetSection("AppSettings").GetSection("Token").Value)
+            );
+
+            SigningCredentials signingCredentials = new SigningCredentials(systemSecurityKey, SecurityAlgorithms.HmacSha512Signature);
+
+            SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claim),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = signingCredentials
+            };
+
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
+            return jwtSecurityTokenHandler.WriteToken(securityToken);
+        }
+
         public async Task<_ServiceResponse<bool>> Validar(CAD_usuarioDTO cAD_usuarioDTO)
         {
             _ServiceResponse<bool> _serviceResponse = new _ServiceResponse<bool>();
@@ -79,8 +150,9 @@ namespace ENPS.Services.Autorizacao
                 if (!validationResult.IsValid)
                 {
                     _serviceResponse.Message = validationResult.ToString();
-                    _serviceResponse.Data = false;
                 }
+
+                _serviceResponse.Data = validationResult.IsValid;
             }
             catch (Exception ex)
             {
