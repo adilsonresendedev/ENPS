@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using ENPS.Enumeradores;
 
 namespace ENPS.Models
 {
-    public class CAD_RedeSocial
+    public class CAD_redeSocial
     {
         public int Id { get; set; }
         public bool Ativo { get; set; }

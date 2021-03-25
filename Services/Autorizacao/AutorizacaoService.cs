@@ -14,29 +14,21 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
+using ENPS.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ENPS.Services.Autorizacao
 {
     public class AutorizacaoService : IAutorizacaoService
     {
-        private List<CAD_Usuario> cAD_Usuarios = new List<CAD_Usuario>()
-        {
-            new CAD_Usuario{CAD_Pessoa = new CAD_Pessoa{ Nome = "Usuario1" }, Senha = "1234", CAD_email = new CAD_email{ Email = "email1@email" }},
-            new CAD_Usuario{CAD_Pessoa = new CAD_Pessoa{ Nome = "Usuario2" }, Senha = "4321", CAD_email = new CAD_email{ Email = "email2@email" }}
-        };
         private readonly IConfiguration _iConfiguration;
         private readonly IMapper _iMapper;
-        public AutorizacaoService(IConfiguration iConfiguration, IMapper iMapper)
+        private readonly DataContext _dataContext;
+        public AutorizacaoService(IConfiguration iConfiguration, IMapper iMapper, DataContext dataContext)
         {
+            _dataContext = dataContext;
             _iConfiguration = iConfiguration;
             _iMapper = iMapper;
-            
-            cAD_Usuarios.ForEach(x =>
-           {
-               SenhaHashUtil.CriarSenhaHash(x.Senha, out byte[] senhaHash, out byte[] senhaSalt);
-               x.SenhaHash = senhaHash;
-               x.SenhaSalt = senhaSalt;
-           });
         }
 
         private async Task<bool> Existe(CAD_usuarioDTO cAD_usuarioDTO)
@@ -50,19 +42,27 @@ namespace ENPS.Services.Autorizacao
             _ServiceResponse<string> _serviceResponse = new _ServiceResponse<string>();
             try
             {
-                CAD_Usuario cAD_Usuario = cAD_Usuarios.FirstOrDefault(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
-                if (cAD_Usuario.Equals(null))
-                {
-                    _serviceResponse.Success = false;
-                    _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
-                    return _serviceResponse;
-                }
-                else if (!VerificarPasswordHash(cAD_usuarioDTO.Senha, cAD_Usuario.SenhaHash, cAD_Usuario.SenhaSalt))
-                {
-                    _serviceResponse.Success = false;
-                    _serviceResponse.Message = UsuarioMensagem.SenhaInvalida();
-                    return _serviceResponse;
-                }
+                // CAD_email cAD_email = await _dataContext.CAD_pessoaCAD_email.Include(x => x.CAD_email).FirstOrDefaultAsync(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
+                //  if (cAD_email.Equals(null))
+                // {
+                //     _serviceResponse.Success = false;
+                //     _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
+                //     return _serviceResponse;
+                // }
+
+                // CAD_Usuario cAD_Usuario = cad_usua.FirstOrDefault(x => x.CAD_email.FirstOrDefault(y => y.Email == cAD_usuarioDTO.Email));
+                // if (cAD_Usuario.Equals(null))
+                // {
+                //     _serviceResponse.Success = false;
+                //     _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
+                //     return _serviceResponse;
+                // }
+                // else if (!VerificarPasswordHash(cAD_usuarioDTO.Senha, cAD_Usuario.SenhaHash, cAD_Usuario.SenhaSalt))
+                // {
+                //     _serviceResponse.Success = false;
+                //     _serviceResponse.Message = UsuarioMensagem.SenhaInvalida();
+                //     return _serviceResponse;
+                // }
 
                 _serviceResponse.Data = CreateToken(cAD_usuarioDTO);
             }

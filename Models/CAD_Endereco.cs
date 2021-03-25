@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace ENPS.Models
 {
-    public class CAD_Endereco
+    public class CAD_endereco
     {
         public int Id { get; set; }
         public bool Ativo { get; set; }
@@ -9,7 +11,9 @@ namespace ENPS.Models
         public string Bairro { get; set; }
         public string Numero { get; set; }
         public string Complemento { get; set; }
-        public COF_Estado cOF_Estado { get; set; }
-        public COF_Cidade cOF_Cidade { get; set; }
+        public COF_Estado COF_Estado { get; set; }
+        public COF_Cidade COF_Cidade { get; set; }
+        public virtual ICollection<CAD_empresa> CAD_Empresa { get; set; }
+        public virtual ICollection<CAD_pessoa> CAD_Pessoa { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ENPS.Models
 {
     public class CAD_Telefone
