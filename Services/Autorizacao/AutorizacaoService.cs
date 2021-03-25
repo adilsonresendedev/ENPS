@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using AutoMapper;
 
 namespace ENPS.Services.Autorizacao
 {
@@ -20,19 +21,22 @@ namespace ENPS.Services.Autorizacao
     {
         private List<CAD_Usuario> cAD_Usuarios = new List<CAD_Usuario>()
         {
-            new CAD_Usuario{cAD_PessoaDTO = new CAD_Pessoa{ Nome = "Usuario1" }, Senha = "1234", cAD_email = new CAD_email{ Email = "email1@email" }},
-            new CAD_Usuario{cAD_PessoaDTO = new CAD_Pessoa{ Nome = "Usuario2" }, Senha = "4321", cAD_email = new CAD_email{ Email = "email2@email" }}
+            new CAD_Usuario{CAD_Pessoa = new CAD_Pessoa{ Nome = "Usuario1" }, Senha = "1234", CAD_email = new CAD_email{ Email = "email1@email" }},
+            new CAD_Usuario{CAD_Pessoa = new CAD_Pessoa{ Nome = "Usuario2" }, Senha = "4321", CAD_email = new CAD_email{ Email = "email2@email" }}
         };
         private readonly IConfiguration _iConfiguration;
-        public AutorizacaoService(IConfiguration iConfiguration)
+        private readonly IMapper _iMapper;
+        public AutorizacaoService(IConfiguration iConfiguration, IMapper iMapper)
         {
             _iConfiguration = iConfiguration;
-            cAD_Usuarios.ForEach( x=> 
-            {
-                SenhaHashUtil.CriarSenhaHash(x.Senha, out byte[] senhaHash, out byte[] senhaSalt);
-                x.SenhaHash = senhaHash;
-                x.SenhaSalt = senhaSalt;
-            });
+            _iMapper = iMapper;
+            
+            cAD_Usuarios.ForEach(x =>
+           {
+               SenhaHashUtil.CriarSenhaHash(x.Senha, out byte[] senhaHash, out byte[] senhaSalt);
+               x.SenhaHash = senhaHash;
+               x.SenhaSalt = senhaSalt;
+           });
         }
 
         private async Task<bool> Existe(CAD_usuarioDTO cAD_usuarioDTO)
@@ -46,7 +50,7 @@ namespace ENPS.Services.Autorizacao
             _ServiceResponse<string> _serviceResponse = new _ServiceResponse<string>();
             try
             {
-                CAD_Usuario cAD_Usuario = cAD_Usuarios.FirstOrDefault(x => x.cAD_email.Email == cAD_usuarioDTO.Email);
+                CAD_Usuario cAD_Usuario = cAD_Usuarios.FirstOrDefault(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
                 if (cAD_Usuario.Equals(null))
                 {
                     _serviceResponse.Success = false;

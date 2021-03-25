@@ -1,6 +1,6 @@
 namespace ENPS.Models
 {
-    public class Pais
+    public class COF_pais
     {
         public int Id { get; set; }
         public bool Ativo { get; set; }

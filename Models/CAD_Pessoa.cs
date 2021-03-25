@@ -8,11 +8,11 @@ namespace ENPS.Models
         public int Id { get; set; }
         public bool Ativo { get; set; }
         public string Nome { get; set; }
-        public CAD_Endereco cAD_EnderecoDTO { get; set; }
-        public List<CAD_Telefone> cAD_TelefoneDTO { get; set; }
-        public List<CAD_RedeSocial> cAD_RedeSocialDTO { get; set; }
-        public ETipoPessoa tipoPessoa { get; set; }
-        public CAD_CNPJ cAD_CNPJDTO { get; set; }
-        public CAD_CPF cAD_CPFDTO { get; set; }
+        public CAD_Endereco CAD_Endereco { get; set; }
+        public List<CAD_Telefone> CAD_Telefone { get; set; }
+        public List<CAD_RedeSocial> CAD_RedeSocial { get; set; }
+        public ETipoPessoa ETipoPessoa { get; set; }
+        public CAD_CNPJ CAD_CNPJ { get; set; }
+        public CAD_CPF CAD_CPF { get; set; }
     }
 }

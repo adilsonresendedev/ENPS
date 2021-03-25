@@ -9,7 +9,7 @@ namespace ENPS.Models
         public string Bairro { get; set; }
         public string Numero { get; set; }
         public string Complemento { get; set; }
-        public COF_Estado cOF_EstadoDTO { get; set; }
-        public COF_Cidade cOF_CidadeDTO { get; set; }
+        public COF_Estado cOF_Estado { get; set; }
+        public COF_Cidade cOF_Cidade { get; set; }
     }
 }

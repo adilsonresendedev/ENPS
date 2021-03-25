@@ -9,8 +9,8 @@ namespace ENPS.Models
         public string Senha { get; set; }
         public byte[] SenhaSalt { get; set; }
         public byte[] SenhaHash { get; set; }
-        public CAD_Pessoa cAD_PessoaDTO { get; set; }
-        public List<CAD_Empresa> cAD_EmpresaDTOs { get; set; }
-        public CAD_email cAD_email { get; set; }
+        public CAD_Pessoa CAD_Pessoa { get; set; }
+        public List<CAD_Empresa> CAD_Empresa { get; set; }
+        public CAD_email CAD_email { get; set; }
     }
 }
