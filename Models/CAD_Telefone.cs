@@ -10,5 +10,7 @@ namespace ENPS.Models
         public int CodigoPais { get; set; }
         public int CodigoEstado { get; set; }
         public int Numero { get; set; }
+        public List<CAD_empresa> CAD_Empresa { get; set; }
+        public List<CAD_pessoa> CAD_Pessoa { get; set; }
     }
 }

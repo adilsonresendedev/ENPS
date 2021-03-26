@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ENPS.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210325020202_InitialCreate")]
+    [Migration("20210326023522_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,66 @@ namespace ENPS.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CAD_TelefoneCAD_empresa", b =>
+                {
+                    b.Property<int>("CAD_EmpresaId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("CAD_telefoneId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("CAD_EmpresaId", "CAD_telefoneId");
+
+                    b.HasIndex("CAD_telefoneId");
+
+                    b.ToTable("CAD_TelefoneCAD_empresa");
+                });
+
+            modelBuilder.Entity("CAD_TelefoneCAD_pessoa", b =>
+                {
+                    b.Property<int>("CAD_PessoaId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("CAD_TelefoneId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("CAD_PessoaId", "CAD_TelefoneId");
+
+                    b.HasIndex("CAD_TelefoneId");
+
+                    b.ToTable("CAD_TelefoneCAD_pessoa");
+                });
+
+            modelBuilder.Entity("CAD_emailCAD_empresa", b =>
+                {
+                    b.Property<int>("CAD_emailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CAD_empresaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CAD_emailId", "CAD_empresaId");
+
+                    b.HasIndex("CAD_empresaId");
+
+                    b.ToTable("CAD_emailCAD_empresa");
+                });
+
+            modelBuilder.Entity("CAD_emailCAD_pessoa", b =>
+                {
+                    b.Property<int>("CAD_emailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CAD_pessoaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CAD_emailId", "CAD_pessoaId");
+
+                    b.HasIndex("CAD_pessoaId");
+
+                    b.ToTable("CAD_emailCAD_pessoa");
+                });
 
             modelBuilder.Entity("CAD_empresaCAD_endereco", b =>
                 {
@@ -36,6 +96,21 @@ namespace ENPS.Migrations
                     b.ToTable("CAD_empresaCAD_endereco");
                 });
 
+            modelBuilder.Entity("CAD_empresaCAD_redeSocial", b =>
+                {
+                    b.Property<int>("CAD_empresaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CAD_redeSocialId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CAD_empresaId", "CAD_redeSocialId");
+
+                    b.HasIndex("CAD_redeSocialId");
+
+                    b.ToTable("CAD_empresaCAD_redeSocial");
+                });
+
             modelBuilder.Entity("CAD_enderecoCAD_pessoa", b =>
                 {
                     b.Property<int>("CAD_EnderecoId")
@@ -49,6 +124,21 @@ namespace ENPS.Migrations
                     b.HasIndex("CAD_PessoaId");
 
                     b.ToTable("CAD_enderecoCAD_pessoa");
+                });
+
+            modelBuilder.Entity("CAD_pessoaCAD_redeSocial", b =>
+                {
+                    b.Property<int>("CAD_PessoaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CAD_RedeSocialId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CAD_PessoaId", "CAD_RedeSocialId");
+
+                    b.HasIndex("CAD_RedeSocialId");
+
+                    b.ToTable("CAD_pessoaCAD_redeSocial");
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_CNPJ", b =>
@@ -91,12 +181,6 @@ namespace ENPS.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("CAD_empresaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CAD_pessoaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CodigoEstado")
                         .HasColumnType("int");
 
@@ -111,10 +195,6 @@ namespace ENPS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CAD_empresaId");
-
-                    b.HasIndex("CAD_pessoaId");
-
                     b.ToTable("CAD_Telefone");
                 });
 
@@ -128,12 +208,6 @@ namespace ENPS.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("CAD_empresaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CAD_pessoaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -141,10 +215,6 @@ namespace ENPS.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CAD_empresaId");
-
-                    b.HasIndex("CAD_pessoaId");
 
                     b.ToTable("CAD_Email");
                 });
@@ -191,45 +261,6 @@ namespace ENPS.Migrations
                     b.HasIndex("COF_estadoId");
 
                     b.ToTable("CAD_empresa");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_empresaCAD_email", b =>
-                {
-                    b.Property<int>("CAD_empresaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CAD_emailId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CAD_empresaId", "CAD_emailId");
-
-                    b.ToTable("CAD_empresaCAD_email");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_empresaCAD_endereco", b =>
-                {
-                    b.Property<int>("CAD_empresaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CAD_enderecoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CAD_empresaId", "CAD_enderecoId");
-
-                    b.ToTable("CAD_empresaCAD_Endereco");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_empresaCAD_telefone", b =>
-                {
-                    b.Property<int>("CAD_empresaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CAD_telefoneId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CAD_empresaId", "CAD_telefoneId");
-
-                    b.ToTable("CAD_empresaCAD_telefone");
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_endereco", b =>
@@ -301,60 +332,6 @@ namespace ENPS.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("CAD_pessoa");
                 });
 
-            modelBuilder.Entity("ENPS.Models.CAD_pessoaCAD_email", b =>
-                {
-                    b.Property<int>("CAD_pessoaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CAD_emailId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CAD_pessoaId", "CAD_emailId");
-
-                    b.HasIndex("CAD_emailId");
-
-                    b.ToTable("CAD_pessoaCAD_email");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_pessoaCAD_endereco", b =>
-                {
-                    b.Property<int>("CAD_pessoaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CAD_enderecoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CAD_pessoaId", "CAD_enderecoId");
-
-                    b.ToTable("CAD_pessoaCAD_endereco");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_pessoaCAD_redeSocial", b =>
-                {
-                    b.Property<int>("CAD_pessoaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CAD_RedeSocialId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CAD_pessoaId", "CAD_RedeSocialId");
-
-                    b.ToTable("CAD_pessoaCAD_redeSocial");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_pessoaCAD_telefone", b =>
-                {
-                    b.Property<int>("CAD_pessoaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CAD_telefone_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("CAD_pessoaId", "CAD_telefone_id");
-
-                    b.ToTable("CAD_pessoaCAD_telefone");
-                });
-
             modelBuilder.Entity("ENPS.Models.CAD_redeSocial", b =>
                 {
                     b.Property<int>("Id")
@@ -365,9 +342,6 @@ namespace ENPS.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("CAD_pessoaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ERedeSocial")
                         .HasColumnType("int");
 
@@ -375,8 +349,6 @@ namespace ENPS.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CAD_pessoaId");
 
                     b.ToTable("CAD_redeSocial");
                 });
@@ -513,6 +485,66 @@ namespace ENPS.Migrations
                     b.HasDiscriminator().HasValue("CAD_Usuario");
                 });
 
+            modelBuilder.Entity("CAD_TelefoneCAD_empresa", b =>
+                {
+                    b.HasOne("ENPS.Models.CAD_empresa", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ENPS.Models.CAD_Telefone", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_telefoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CAD_TelefoneCAD_pessoa", b =>
+                {
+                    b.HasOne("ENPS.Models.CAD_pessoa", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_PessoaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ENPS.Models.CAD_Telefone", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_TelefoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CAD_emailCAD_empresa", b =>
+                {
+                    b.HasOne("ENPS.Models.CAD_email", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_emailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ENPS.Models.CAD_empresa", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_empresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CAD_emailCAD_pessoa", b =>
+                {
+                    b.HasOne("ENPS.Models.CAD_email", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_emailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ENPS.Models.CAD_pessoa", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_pessoaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CAD_empresaCAD_endereco", b =>
                 {
                     b.HasOne("ENPS.Models.CAD_empresa", null)
@@ -524,6 +556,21 @@ namespace ENPS.Migrations
                     b.HasOne("ENPS.Models.CAD_endereco", null)
                         .WithMany()
                         .HasForeignKey("CAD_enderedoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CAD_empresaCAD_redeSocial", b =>
+                {
+                    b.HasOne("ENPS.Models.CAD_empresa", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_empresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ENPS.Models.CAD_redeSocial", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_redeSocialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -543,26 +590,19 @@ namespace ENPS.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ENPS.Models.CAD_Telefone", b =>
+            modelBuilder.Entity("CAD_pessoaCAD_redeSocial", b =>
                 {
-                    b.HasOne("ENPS.Models.CAD_empresa", null)
-                        .WithMany("CAD_telefone")
-                        .HasForeignKey("CAD_empresaId");
-
                     b.HasOne("ENPS.Models.CAD_pessoa", null)
-                        .WithMany("CAD_Telefone")
-                        .HasForeignKey("CAD_pessoaId");
-                });
+                        .WithMany()
+                        .HasForeignKey("CAD_PessoaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("ENPS.Models.CAD_email", b =>
-                {
-                    b.HasOne("ENPS.Models.CAD_empresa", null)
-                        .WithMany("CAD_email")
-                        .HasForeignKey("CAD_empresaId");
-
-                    b.HasOne("ENPS.Models.CAD_pessoa", null)
-                        .WithMany("CAD_email")
-                        .HasForeignKey("CAD_pessoaId");
+                    b.HasOne("ENPS.Models.CAD_redeSocial", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_RedeSocialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_empresa", b =>
@@ -616,32 +656,6 @@ namespace ENPS.Migrations
                     b.Navigation("CAD_CPF");
                 });
 
-            modelBuilder.Entity("ENPS.Models.CAD_pessoaCAD_email", b =>
-                {
-                    b.HasOne("ENPS.Models.CAD_email", "CAD_email")
-                        .WithMany()
-                        .HasForeignKey("CAD_emailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ENPS.Models.CAD_pessoa", "cAD_pessoa")
-                        .WithMany()
-                        .HasForeignKey("CAD_pessoaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CAD_email");
-
-                    b.Navigation("cAD_pessoa");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_redeSocial", b =>
-                {
-                    b.HasOne("ENPS.Models.CAD_pessoa", null)
-                        .WithMany("CAD_RedeSocial")
-                        .HasForeignKey("CAD_pessoaId");
-                });
-
             modelBuilder.Entity("ENPS.Models.NPS_Pesquisa", b =>
                 {
                     b.HasOne("ENPS.Models.CAD_empresa", "CAD_empresa")
@@ -668,22 +682,6 @@ namespace ENPS.Migrations
                     b.Navigation("CAD_Pessoa");
 
                     b.Navigation("NPS_Pesquisa");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_empresa", b =>
-                {
-                    b.Navigation("CAD_email");
-
-                    b.Navigation("CAD_telefone");
-                });
-
-            modelBuilder.Entity("ENPS.Models.CAD_pessoa", b =>
-                {
-                    b.Navigation("CAD_email");
-
-                    b.Navigation("CAD_RedeSocial");
-
-                    b.Navigation("CAD_Telefone");
                 });
 
             modelBuilder.Entity("ENPS.Models.NPS_Pesquisa", b =>

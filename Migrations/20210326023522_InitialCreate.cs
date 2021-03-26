@@ -34,75 +34,50 @@ namespace ENPS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAD_empresaCAD_email",
+                name: "CAD_Email",
                 columns: table => new
                 {
-                    CAD_empresaId = table.Column<int>(type: "int", nullable: false),
-                    CAD_emailId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    Princial = table.Column<bool>(type: "bit", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CAD_empresaCAD_email", x => new { x.CAD_empresaId, x.CAD_emailId });
+                    table.PrimaryKey("PK_CAD_Email", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAD_empresaCAD_Endereco",
+                name: "CAD_redeSocial",
                 columns: table => new
                 {
-                    CAD_empresaId = table.Column<int>(type: "int", nullable: false),
-                    CAD_enderecoId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    ERedeSocial = table.Column<int>(type: "int", nullable: false),
+                    LinkRedeSocial = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CAD_empresaCAD_Endereco", x => new { x.CAD_empresaId, x.CAD_enderecoId });
+                    table.PrimaryKey("PK_CAD_redeSocial", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAD_empresaCAD_telefone",
+                name: "CAD_Telefone",
                 columns: table => new
                 {
-                    CAD_empresaId = table.Column<int>(type: "int", nullable: false),
-                    CAD_telefoneId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    Princial = table.Column<bool>(type: "bit", nullable: false),
+                    CodigoPais = table.Column<int>(type: "int", nullable: false),
+                    CodigoEstado = table.Column<int>(type: "int", nullable: false),
+                    Numero = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CAD_empresaCAD_telefone", x => new { x.CAD_empresaId, x.CAD_telefoneId });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CAD_pessoaCAD_endereco",
-                columns: table => new
-                {
-                    CAD_pessoaId = table.Column<int>(type: "int", nullable: false),
-                    CAD_enderecoId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CAD_pessoaCAD_endereco", x => new { x.CAD_pessoaId, x.CAD_enderecoId });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CAD_pessoaCAD_redeSocial",
-                columns: table => new
-                {
-                    CAD_pessoaId = table.Column<int>(type: "int", nullable: false),
-                    CAD_RedeSocialId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CAD_pessoaCAD_redeSocial", x => new { x.CAD_pessoaId, x.CAD_RedeSocialId });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CAD_pessoaCAD_telefone",
-                columns: table => new
-                {
-                    CAD_pessoaId = table.Column<int>(type: "int", nullable: false),
-                    CAD_telefone_id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CAD_pessoaCAD_telefone", x => new { x.CAD_pessoaId, x.CAD_telefone_id });
+                    table.PrimaryKey("PK_CAD_Telefone", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,6 +181,30 @@ namespace ENPS.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CAD_emailCAD_pessoa",
+                columns: table => new
+                {
+                    CAD_emailId = table.Column<int>(type: "int", nullable: false),
+                    CAD_pessoaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CAD_emailCAD_pessoa", x => new { x.CAD_emailId, x.CAD_pessoaId });
+                    table.ForeignKey(
+                        name: "FK_CAD_emailCAD_pessoa_CAD_Email_CAD_emailId",
+                        column: x => x.CAD_emailId,
+                        principalTable: "CAD_Email",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CAD_emailCAD_pessoa_CAD_Pessoa_CAD_pessoaId",
+                        column: x => x.CAD_pessoaId,
+                        principalTable: "CAD_Pessoa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CAD_empresa",
                 columns: table => new
                 {
@@ -250,25 +249,51 @@ namespace ENPS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAD_redeSocial",
+                name: "CAD_pessoaCAD_redeSocial",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    ERedeSocial = table.Column<int>(type: "int", nullable: false),
-                    LinkRedeSocial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CAD_pessoaId = table.Column<int>(type: "int", nullable: true)
+                    CAD_PessoaId = table.Column<int>(type: "int", nullable: false),
+                    CAD_RedeSocialId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CAD_redeSocial", x => x.Id);
+                    table.PrimaryKey("PK_CAD_pessoaCAD_redeSocial", x => new { x.CAD_PessoaId, x.CAD_RedeSocialId });
                     table.ForeignKey(
-                        name: "FK_CAD_redeSocial_CAD_Pessoa_CAD_pessoaId",
-                        column: x => x.CAD_pessoaId,
+                        name: "FK_CAD_pessoaCAD_redeSocial_CAD_Pessoa_CAD_PessoaId",
+                        column: x => x.CAD_PessoaId,
                         principalTable: "CAD_Pessoa",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CAD_pessoaCAD_redeSocial_CAD_redeSocial_CAD_RedeSocialId",
+                        column: x => x.CAD_RedeSocialId,
+                        principalTable: "CAD_redeSocial",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CAD_TelefoneCAD_pessoa",
+                columns: table => new
+                {
+                    CAD_PessoaId = table.Column<int>(type: "int", nullable: false),
+                    CAD_TelefoneId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CAD_TelefoneCAD_pessoa", x => new { x.CAD_PessoaId, x.CAD_TelefoneId });
+                    table.ForeignKey(
+                        name: "FK_CAD_TelefoneCAD_pessoa_CAD_Pessoa_CAD_PessoaId",
+                        column: x => x.CAD_PessoaId,
+                        principalTable: "CAD_Pessoa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CAD_TelefoneCAD_pessoa_CAD_Telefone_CAD_TelefoneId",
+                        column: x => x.CAD_TelefoneId,
+                        principalTable: "CAD_Telefone",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -296,32 +321,27 @@ namespace ENPS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAD_Email",
+                name: "CAD_emailCAD_empresa",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    Princial = table.Column<bool>(type: "bit", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CAD_empresaId = table.Column<int>(type: "int", nullable: true),
-                    CAD_pessoaId = table.Column<int>(type: "int", nullable: true)
+                    CAD_emailId = table.Column<int>(type: "int", nullable: false),
+                    CAD_empresaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CAD_Email", x => x.Id);
+                    table.PrimaryKey("PK_CAD_emailCAD_empresa", x => new { x.CAD_emailId, x.CAD_empresaId });
                     table.ForeignKey(
-                        name: "FK_CAD_Email_CAD_empresa_CAD_empresaId",
+                        name: "FK_CAD_emailCAD_empresa_CAD_Email_CAD_emailId",
+                        column: x => x.CAD_emailId,
+                        principalTable: "CAD_Email",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CAD_emailCAD_empresa_CAD_empresa_CAD_empresaId",
                         column: x => x.CAD_empresaId,
                         principalTable: "CAD_empresa",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CAD_Email_CAD_Pessoa_CAD_pessoaId",
-                        column: x => x.CAD_pessoaId,
-                        principalTable: "CAD_Pessoa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -349,34 +369,51 @@ namespace ENPS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAD_Telefone",
+                name: "CAD_empresaCAD_redeSocial",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    Princial = table.Column<bool>(type: "bit", nullable: false),
-                    CodigoPais = table.Column<int>(type: "int", nullable: false),
-                    CodigoEstado = table.Column<int>(type: "int", nullable: false),
-                    Numero = table.Column<int>(type: "int", nullable: false),
-                    CAD_empresaId = table.Column<int>(type: "int", nullable: true),
-                    CAD_pessoaId = table.Column<int>(type: "int", nullable: true)
+                    CAD_empresaId = table.Column<int>(type: "int", nullable: false),
+                    CAD_redeSocialId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CAD_Telefone", x => x.Id);
+                    table.PrimaryKey("PK_CAD_empresaCAD_redeSocial", x => new { x.CAD_empresaId, x.CAD_redeSocialId });
                     table.ForeignKey(
-                        name: "FK_CAD_Telefone_CAD_empresa_CAD_empresaId",
+                        name: "FK_CAD_empresaCAD_redeSocial_CAD_empresa_CAD_empresaId",
                         column: x => x.CAD_empresaId,
                         principalTable: "CAD_empresa",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CAD_Telefone_CAD_Pessoa_CAD_pessoaId",
-                        column: x => x.CAD_pessoaId,
-                        principalTable: "CAD_Pessoa",
+                        name: "FK_CAD_empresaCAD_redeSocial_CAD_redeSocial_CAD_redeSocialId",
+                        column: x => x.CAD_redeSocialId,
+                        principalTable: "CAD_redeSocial",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CAD_TelefoneCAD_empresa",
+                columns: table => new
+                {
+                    CAD_EmpresaId = table.Column<int>(type: "int", nullable: false),
+                    CAD_telefoneId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CAD_TelefoneCAD_empresa", x => new { x.CAD_EmpresaId, x.CAD_telefoneId });
+                    table.ForeignKey(
+                        name: "FK_CAD_TelefoneCAD_empresa_CAD_empresa_CAD_EmpresaId",
+                        column: x => x.CAD_EmpresaId,
+                        principalTable: "CAD_empresa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CAD_TelefoneCAD_empresa_CAD_Telefone_CAD_telefoneId",
+                        column: x => x.CAD_telefoneId,
+                        principalTable: "CAD_Telefone",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -406,30 +443,6 @@ namespace ENPS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CAD_pessoaCAD_email",
-                columns: table => new
-                {
-                    CAD_pessoaId = table.Column<int>(type: "int", nullable: false),
-                    CAD_emailId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CAD_pessoaCAD_email", x => new { x.CAD_pessoaId, x.CAD_emailId });
-                    table.ForeignKey(
-                        name: "FK_CAD_pessoaCAD_email_CAD_Email_CAD_emailId",
-                        column: x => x.CAD_emailId,
-                        principalTable: "CAD_Email",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CAD_pessoaCAD_email_CAD_Pessoa_CAD_pessoaId",
-                        column: x => x.CAD_pessoaId,
-                        principalTable: "CAD_Pessoa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "NPS_votacao",
                 columns: table => new
                 {
@@ -456,13 +469,13 @@ namespace ENPS.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_Email_CAD_empresaId",
-                table: "CAD_Email",
+                name: "IX_CAD_emailCAD_empresa_CAD_empresaId",
+                table: "CAD_emailCAD_empresa",
                 column: "CAD_empresaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_Email_CAD_pessoaId",
-                table: "CAD_Email",
+                name: "IX_CAD_emailCAD_pessoa_CAD_pessoaId",
+                table: "CAD_emailCAD_pessoa",
                 column: "CAD_pessoaId");
 
             migrationBuilder.CreateIndex(
@@ -491,6 +504,11 @@ namespace ENPS.Migrations
                 column: "CAD_enderedoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CAD_empresaCAD_redeSocial_CAD_redeSocialId",
+                table: "CAD_empresaCAD_redeSocial",
+                column: "CAD_redeSocialId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CAD_endereco_COF_CidadeId",
                 table: "CAD_endereco",
                 column: "COF_CidadeId");
@@ -511,24 +529,19 @@ namespace ENPS.Migrations
                 column: "CAD_CPFId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_pessoaCAD_email_CAD_emailId",
-                table: "CAD_pessoaCAD_email",
-                column: "CAD_emailId");
+                name: "IX_CAD_pessoaCAD_redeSocial_CAD_RedeSocialId",
+                table: "CAD_pessoaCAD_redeSocial",
+                column: "CAD_RedeSocialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_redeSocial_CAD_pessoaId",
-                table: "CAD_redeSocial",
-                column: "CAD_pessoaId");
+                name: "IX_CAD_TelefoneCAD_empresa_CAD_telefoneId",
+                table: "CAD_TelefoneCAD_empresa",
+                column: "CAD_telefoneId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_Telefone_CAD_empresaId",
-                table: "CAD_Telefone",
-                column: "CAD_empresaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CAD_Telefone_CAD_pessoaId",
-                table: "CAD_Telefone",
-                column: "CAD_pessoaId");
+                name: "IX_CAD_TelefoneCAD_pessoa_CAD_TelefoneId",
+                table: "CAD_TelefoneCAD_pessoa",
+                column: "CAD_TelefoneId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NPS_Pesquisa_CAD_empresaId",
@@ -544,37 +557,28 @@ namespace ENPS.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CAD_empresaCAD_email");
+                name: "CAD_emailCAD_empresa");
+
+            migrationBuilder.DropTable(
+                name: "CAD_emailCAD_pessoa");
 
             migrationBuilder.DropTable(
                 name: "CAD_empresaCAD_endereco");
 
             migrationBuilder.DropTable(
-                name: "CAD_empresaCAD_Endereco");
-
-            migrationBuilder.DropTable(
-                name: "CAD_empresaCAD_telefone");
+                name: "CAD_empresaCAD_redeSocial");
 
             migrationBuilder.DropTable(
                 name: "CAD_enderecoCAD_pessoa");
 
             migrationBuilder.DropTable(
-                name: "CAD_pessoaCAD_email");
-
-            migrationBuilder.DropTable(
-                name: "CAD_pessoaCAD_endereco");
-
-            migrationBuilder.DropTable(
                 name: "CAD_pessoaCAD_redeSocial");
 
             migrationBuilder.DropTable(
-                name: "CAD_pessoaCAD_telefone");
+                name: "CAD_TelefoneCAD_empresa");
 
             migrationBuilder.DropTable(
-                name: "CAD_redeSocial");
-
-            migrationBuilder.DropTable(
-                name: "CAD_Telefone");
+                name: "CAD_TelefoneCAD_pessoa");
 
             migrationBuilder.DropTable(
                 name: "COF_pais");
@@ -583,10 +587,16 @@ namespace ENPS.Migrations
                 name: "NPS_votacao");
 
             migrationBuilder.DropTable(
+                name: "CAD_Email");
+
+            migrationBuilder.DropTable(
                 name: "CAD_endereco");
 
             migrationBuilder.DropTable(
-                name: "CAD_Email");
+                name: "CAD_redeSocial");
+
+            migrationBuilder.DropTable(
+                name: "CAD_Telefone");
 
             migrationBuilder.DropTable(
                 name: "NPS_Pesquisa");

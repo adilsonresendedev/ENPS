@@ -13,7 +13,7 @@ namespace ENPS.Models
         public string Complemento { get; set; }
         public COF_Estado COF_Estado { get; set; }
         public COF_Cidade COF_Cidade { get; set; }
-        public virtual ICollection<CAD_empresa> CAD_Empresa { get; set; }
-        public virtual ICollection<CAD_pessoa> CAD_Pessoa { get; set; }
+        public List<CAD_empresa> CAD_Empresa { get; set; }
+        public List<CAD_pessoa> CAD_Pessoa { get; set; }
     }
 }

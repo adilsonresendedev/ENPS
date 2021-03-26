@@ -9,5 +9,7 @@ namespace ENPS.Models
         public bool Ativo { get; set; }
         public ERedeSocial ERedeSocial { get; set; }
         public string LinkRedeSocial { get; set; }
+        public List<CAD_pessoa> CAD_Pessoa { get; set; }
+        public List<CAD_empresa> CAD_empresa { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace ENPS.Models
         public string IE { get; set; }
         public List<CAD_endereco> CAD_enderedo { get; set; }
         public List<CAD_Telefone> CAD_telefone { get; set; }
+        public List<CAD_redeSocial> CAD_redeSocial { get; set; }
         public COF_Estado COF_estado { get; set; }
         public COF_Cidade COF_cidade { get; set; }
         public CAD_Usuario CAD_Usuario { get; set; }
