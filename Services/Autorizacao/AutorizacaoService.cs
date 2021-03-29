@@ -42,27 +42,19 @@ namespace ENPS.Services.Autorizacao
             _ServiceResponse<string> _serviceResponse = new _ServiceResponse<string>();
             try
             {
-                // CAD_email cAD_email = await _dataContext.CAD_pessoaCAD_email.Include(x => x.CAD_email).FirstOrDefaultAsync(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
-                //  if (cAD_email.Equals(null))
-                // {
-                //     _serviceResponse.Success = false;
-                //     _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
-                //     return _serviceResponse;
-                // }
-
-                // CAD_Usuario cAD_Usuario = cad_usua.FirstOrDefault(x => x.CAD_email.FirstOrDefault(y => y.Email == cAD_usuarioDTO.Email));
-                // if (cAD_Usuario.Equals(null))
-                // {
-                //     _serviceResponse.Success = false;
-                //     _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
-                //     return _serviceResponse;
-                // }
-                // else if (!VerificarPasswordHash(cAD_usuarioDTO.Senha, cAD_Usuario.SenhaHash, cAD_Usuario.SenhaSalt))
-                // {
-                //     _serviceResponse.Success = false;
-                //     _serviceResponse.Message = UsuarioMensagem.SenhaInvalida();
-                //     return _serviceResponse;
-                // }
+                CAD_Usuario cAD_Usuario = await _dataContext.CAD_usuario.FirstAsync(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
+                if (cAD_Usuario.Equals(null))
+                {
+                    _serviceResponse.Success = false;
+                    _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
+                    return _serviceResponse;
+                }
+                else if (!VerificarPasswordHash(cAD_usuarioDTO.Senha, cAD_Usuario.SenhaHash, cAD_Usuario.SenhaSalt))
+                {
+                    _serviceResponse.Success = false;
+                    _serviceResponse.Message = UsuarioMensagem.SenhaInvalida();
+                    return _serviceResponse;
+                }
 
                 _serviceResponse.Data = CreateToken(cAD_usuarioDTO);
             }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OnIVhLedF94QTCLOicBfulAkxgWwkHkjhNSysMQ7K/8oI9hFRRwMZa6CWlrq/gKX/jV2CbWJn6e+1+iBGzcmPA==",
+  "dgSpecHash": "RycWIGHhAO0urvQvUlMsBKPX95wH72q0E0Ab/ud0xXRX3hISFvNT1M7Rp8rE6YZW0Q++SKJ1e8DnOz7UnTUFYg==",
   "success": true,
-  "projectFilePath": "D:\\GIT\\ENPS\\ENPS.csproj",
+  "projectFilePath": "d:\\GIT\\ENPS\\ENPS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Adilson\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
@@ -40,7 +40,9 @@
     "C:\\Users\\Adilson\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Adilson\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\Adilson\\.nuget\\packages\\nunit\\3.13.1\\nunit.3.13.1.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\Adilson\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",

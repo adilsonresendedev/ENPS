@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GIT\\ENPS\\ENPS.csproj": {}
+    "d:\\GIT\\ENPS\\ENPS.csproj": {}
   },
   "projects": {
-    "D:\\GIT\\ENPS\\ENPS.csproj": {
+    "d:\\GIT\\ENPS\\ENPS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GIT\\ENPS\\ENPS.csproj",
+        "projectUniqueName": "d:\\GIT\\ENPS\\ENPS.csproj",
         "projectName": "ENPS",
-        "projectPath": "D:\\GIT\\ENPS\\ENPS.csproj",
+        "projectPath": "d:\\GIT\\ENPS\\ENPS.csproj",
         "packagesPath": "C:\\Users\\Adilson\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\ENPS\\obj\\",
+        "outputPath": "d:\\GIT\\ENPS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -70,6 +70,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
