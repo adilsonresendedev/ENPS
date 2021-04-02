@@ -14,9 +14,14 @@ namespace ENPS.Mensagens
             return "Usuário não encontrado!";
         }
 
-         public static string SenhaInvalida()
+        public static string SenhaInvalida()
         {
             return "Senha inválida!";
+        }
+
+        public static string SucessoCadastro()
+        {
+            return "Usuário cadastrado com sucesso!";
         }
     }
 }

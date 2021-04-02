@@ -84,6 +84,7 @@ namespace ENPS.Services.Autorizacao
                 cAD_usuarioDTO.SenhaSalt = senhaSalt;
 
                 _serviceResponse.Data = cAD_usuarioDTO;
+                _serviceResponse.Message = UsuarioMensagem.SucessoCadastro();
                 return _serviceResponse;
             }
             catch (Exception ex)
