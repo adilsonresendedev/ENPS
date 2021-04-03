@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace ENPS.TestesUnitarios.UtilTestes
+namespace ENPS.Testes.Unitario
 {
     [TestFixture]
     public class SenhaHashUtilTestes

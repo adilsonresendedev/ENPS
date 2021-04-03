@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace ENPS.Controllers
 {
-    public class CAD_empresaController
+    [ApiController]
+    [Route("[controller]")]
+    public class CAD_empresaController : ControllerBase
     {
         
     }

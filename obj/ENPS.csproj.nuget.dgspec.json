@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\GIT\\ENPS\\ENPS.csproj": {}
+    "D:\\GIT\\ENPS\\ENPS.csproj": {}
   },
   "projects": {
-    "d:\\GIT\\ENPS\\ENPS.csproj": {
+    "D:\\GIT\\ENPS\\ENPS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\GIT\\ENPS\\ENPS.csproj",
+        "projectUniqueName": "D:\\GIT\\ENPS\\ENPS.csproj",
         "projectName": "ENPS",
-        "projectPath": "d:\\GIT\\ENPS\\ENPS.csproj",
+        "projectPath": "D:\\GIT\\ENPS\\ENPS.csproj",
         "packagesPath": "C:\\Users\\Adilson\\.nuget\\packages\\",
-        "outputPath": "d:\\GIT\\ENPS\\obj\\",
+        "outputPath": "D:\\GIT\\ENPS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

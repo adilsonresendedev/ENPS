@@ -42,7 +42,8 @@ namespace ENPS.Services.Autorizacao
             _ServiceResponse<string> _serviceResponse = new _ServiceResponse<string>();
             try
             {
-                CAD_Usuario cAD_Usuario = await _dataContext.CAD_usuario.FirstAsync(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
+                CAD_pessoa cAD_pessoa = _dataContext.CAD_Pessoa.Include(x => x.CAD_email).FirstOrDefault(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
+                CAD_Usuario cAD_Usuario = await _dataContext.CAD_usuario.FirstOrDefaultAsync(x => x.CAD_pessoa.Id == cAD_pessoa.Id);
                 if (cAD_Usuario.Equals(null))
                 {
                     _serviceResponse.Success = false;
@@ -69,6 +70,7 @@ namespace ENPS.Services.Autorizacao
 
         public async Task<_ServiceResponse<CAD_usuarioDTO>> Registrar(CAD_usuarioDTO cAD_usuarioDTO)
         {
+            CAD_Usuario cAD_usuario = new CAD_Usuario();
             _ServiceResponse<CAD_usuarioDTO> _serviceResponse = new _ServiceResponse<CAD_usuarioDTO>();
             try
             {
@@ -80,8 +82,8 @@ namespace ENPS.Services.Autorizacao
                 }
 
                 SenhaHashUtil.CriarSenhaHash(cAD_usuarioDTO.Senha, out byte[] senhaHash, out byte[] senhaSalt);
-                cAD_usuarioDTO.SenhaHash = senhaHash;
-                cAD_usuarioDTO.SenhaSalt = senhaSalt;
+                cAD_usuario.SenhaHash = senhaHash;
+                cAD_usuario.SenhaSalt = senhaSalt;
 
                 _serviceResponse.Data = cAD_usuarioDTO;
                 _serviceResponse.Message = UsuarioMensagem.SucessoCadastro();

@@ -166,6 +166,32 @@ namespace ENPS.Migrations
                     b.ToTable("CAD_Telefone");
                 });
 
+            modelBuilder.Entity("ENPS.Models.CAD_Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CAD_pessoaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Senha")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("SenhaHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("SenhaSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CAD_pessoaId");
+
+                    b.ToTable("CAD_usuario");
+                });
+
             modelBuilder.Entity("ENPS.Models.CAD_email", b =>
                 {
                     b.Property<int>("Id")
@@ -206,12 +232,6 @@ namespace ENPS.Migrations
                     b.Property<int?>("CAD_emailId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("COF_cidadeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("COF_estadoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Fantasia")
                         .HasColumnType("nvarchar(max)");
 
@@ -229,10 +249,6 @@ namespace ENPS.Migrations
 
                     b.HasIndex("CAD_emailId");
 
-                    b.HasIndex("COF_cidadeId");
-
-                    b.HasIndex("COF_estadoId");
-
                     b.ToTable("CAD_empresa");
                 });
 
@@ -249,10 +265,16 @@ namespace ENPS.Migrations
                     b.Property<string>("Bairro")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CEP")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("COF_CidadeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("COF_EstadoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("COF_paisId")
                         .HasColumnType("int");
 
                     b.Property<string>("Complemento")
@@ -273,6 +295,8 @@ namespace ENPS.Migrations
 
                     b.HasIndex("COF_EstadoId");
 
+                    b.HasIndex("COF_paisId");
+
                     b.ToTable("CAD_endereco");
                 });
 
@@ -292,10 +316,6 @@ namespace ENPS.Migrations
                     b.Property<int?>("CAD_emailId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -306,8 +326,6 @@ namespace ENPS.Migrations
                     b.HasIndex("CAD_emailId");
 
                     b.ToTable("CAD_Pessoa");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("CAD_pessoa");
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_redeSocial", b =>
@@ -447,22 +465,6 @@ namespace ENPS.Migrations
                     b.ToTable("NPS_votacao");
                 });
 
-            modelBuilder.Entity("ENPS.Models.CAD_Usuario", b =>
-                {
-                    b.HasBaseType("ENPS.Models.CAD_pessoa");
-
-                    b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("SenhaHash")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("SenhaSalt")
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasDiscriminator().HasValue("CAD_Usuario");
-                });
-
             modelBuilder.Entity("CAD_TelefoneCAD_empresa", b =>
                 {
                     b.HasOne("ENPS.Models.CAD_empresa", null)
@@ -553,6 +555,15 @@ namespace ENPS.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ENPS.Models.CAD_Usuario", b =>
+                {
+                    b.HasOne("ENPS.Models.CAD_pessoa", "CAD_pessoa")
+                        .WithMany()
+                        .HasForeignKey("CAD_pessoaId");
+
+                    b.Navigation("CAD_pessoa");
+                });
+
             modelBuilder.Entity("ENPS.Models.CAD_empresa", b =>
                 {
                     b.HasOne("ENPS.Models.CAD_CNPJ", "CAD_CNPJ")
@@ -567,23 +578,11 @@ namespace ENPS.Migrations
                         .WithMany("CAD_empresa")
                         .HasForeignKey("CAD_emailId");
 
-                    b.HasOne("ENPS.Models.COF_Cidade", "COF_cidade")
-                        .WithMany()
-                        .HasForeignKey("COF_cidadeId");
-
-                    b.HasOne("ENPS.Models.COF_Estado", "COF_estado")
-                        .WithMany()
-                        .HasForeignKey("COF_estadoId");
-
                     b.Navigation("CAD_CNPJ");
 
                     b.Navigation("CAD_email");
 
                     b.Navigation("CAD_Usuario");
-
-                    b.Navigation("COF_cidade");
-
-                    b.Navigation("COF_estado");
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_endereco", b =>
@@ -596,9 +595,15 @@ namespace ENPS.Migrations
                         .WithMany()
                         .HasForeignKey("COF_EstadoId");
 
+                    b.HasOne("ENPS.Models.COF_pais", "COF_pais")
+                        .WithMany()
+                        .HasForeignKey("COF_paisId");
+
                     b.Navigation("COF_Cidade");
 
                     b.Navigation("COF_Estado");
+
+                    b.Navigation("COF_pais");
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_pessoa", b =>

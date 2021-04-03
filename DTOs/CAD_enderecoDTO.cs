@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-
-namespace ENPS.Models
+namespace ENPS.DTOs
 {
-    public class CAD_endereco
+    public class CAD_enderecoDTO
     {
         public int Id { get; set; }
         public bool Ativo { get; set; }
@@ -12,10 +10,8 @@ namespace ENPS.Models
         public string Numero { get; set; }
         public string Complemento { get; set; }
         public string CEP { get; set; }
-        public COF_Estado COF_Estado { get; set; }
-        public COF_Cidade COF_Cidade { get; set; }
-        public COF_pais COF_pais { get; set; }
-        public List<CAD_empresa> CAD_Empresa { get; set; }
-        public List<CAD_pessoa> CAD_Pessoa { get; set; }
+        public string Cidade {get;set;}
+        public string Estado {get;set;}
+        public string Pais {get;set;}
     }
 }
