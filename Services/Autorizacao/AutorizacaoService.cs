@@ -84,7 +84,18 @@ namespace ENPS.Services.Autorizacao
                 SenhaHashUtil.CriarSenhaHash(cAD_usuarioDTO.Senha, out byte[] senhaHash, out byte[] senhaSalt);
                 cAD_usuario.SenhaHash = senhaHash;
                 cAD_usuario.SenhaSalt = senhaSalt;
+                cAD_usuario.CAD_pessoa = new CAD_pessoa
+                {
+                    Nome = cAD_usuarioDTO.Nome,
+                    CAD_email = new CAD_email
+                    {
+                        Email = cAD_usuarioDTO.Email
+                    }
+                };
 
+                await _dataContext.CAD_usuario.AddAsync(cAD_usuario);
+                await _dataContext.SaveChangesAsync();
+                
                 _serviceResponse.Data = cAD_usuarioDTO;
                 _serviceResponse.Message = UsuarioMensagem.SucessoCadastro();
                 return _serviceResponse;

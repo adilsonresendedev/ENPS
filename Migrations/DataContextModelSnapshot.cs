@@ -49,6 +49,21 @@ namespace ENPS.Migrations
                     b.ToTable("CAD_TelefoneCAD_pessoa");
                 });
 
+            modelBuilder.Entity("CAD_UsuarioCAD_empresa", b =>
+                {
+                    b.Property<int>("CAD_UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CAD_empresaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CAD_UsuarioId", "CAD_empresaId");
+
+                    b.HasIndex("CAD_empresaId");
+
+                    b.ToTable("CAD_UsuarioCAD_empresa");
+                });
+
             modelBuilder.Entity("CAD_empresaCAD_endereco", b =>
                 {
                     b.Property<int>("CAD_EmpresaId")
@@ -116,6 +131,9 @@ namespace ENPS.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Ativo")
+                        .HasColumnType("int");
+
                     b.Property<string>("CNPJ")
                         .HasColumnType("nvarchar(max)");
 
@@ -130,6 +148,9 @@ namespace ENPS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
@@ -173,11 +194,11 @@ namespace ENPS.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("CAD_pessoaId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("SenhaHash")
                         .HasColumnType("varbinary(max)");
@@ -226,9 +247,6 @@ namespace ENPS.Migrations
                     b.Property<int?>("CAD_CNPJId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CAD_UsuarioId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CAD_emailId")
                         .HasColumnType("int");
 
@@ -244,8 +262,6 @@ namespace ENPS.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CAD_CNPJId");
-
-                    b.HasIndex("CAD_UsuarioId");
 
                     b.HasIndex("CAD_emailId");
 
@@ -316,6 +332,9 @@ namespace ENPS.Migrations
                     b.Property<int?>("CAD_emailId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("NPS_PesquisaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -324,6 +343,8 @@ namespace ENPS.Migrations
                     b.HasIndex("CAD_CPFId");
 
                     b.HasIndex("CAD_emailId");
+
+                    b.HasIndex("NPS_PesquisaId");
 
                     b.ToTable("CAD_Pessoa");
                 });
@@ -495,6 +516,21 @@ namespace ENPS.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CAD_UsuarioCAD_empresa", b =>
+                {
+                    b.HasOne("ENPS.Models.CAD_Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ENPS.Models.CAD_empresa", null)
+                        .WithMany()
+                        .HasForeignKey("CAD_empresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CAD_empresaCAD_endereco", b =>
                 {
                     b.HasOne("ENPS.Models.CAD_empresa", null)
@@ -570,10 +606,6 @@ namespace ENPS.Migrations
                         .WithMany()
                         .HasForeignKey("CAD_CNPJId");
 
-                    b.HasOne("ENPS.Models.CAD_Usuario", "CAD_Usuario")
-                        .WithMany()
-                        .HasForeignKey("CAD_UsuarioId");
-
                     b.HasOne("ENPS.Models.CAD_email", "CAD_email")
                         .WithMany("CAD_empresa")
                         .HasForeignKey("CAD_emailId");
@@ -581,8 +613,6 @@ namespace ENPS.Migrations
                     b.Navigation("CAD_CNPJ");
 
                     b.Navigation("CAD_email");
-
-                    b.Navigation("CAD_Usuario");
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_endereco", b =>
@@ -616,6 +646,10 @@ namespace ENPS.Migrations
                         .WithMany("CAD_pessoa")
                         .HasForeignKey("CAD_emailId");
 
+                    b.HasOne("ENPS.Models.NPS_Pesquisa", null)
+                        .WithMany("CAD_pessoa")
+                        .HasForeignKey("NPS_PesquisaId");
+
                     b.Navigation("CAD_CPF");
 
                     b.Navigation("CAD_email");
@@ -633,7 +667,7 @@ namespace ENPS.Migrations
             modelBuilder.Entity("ENPS.Models.NPS_votacao", b =>
                 {
                     b.HasOne("ENPS.Models.CAD_pessoa", "CAD_Pessoa")
-                        .WithMany()
+                        .WithMany("NPS_votacao")
                         .HasForeignKey("cAD_pessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -656,8 +690,15 @@ namespace ENPS.Migrations
                     b.Navigation("CAD_pessoa");
                 });
 
+            modelBuilder.Entity("ENPS.Models.CAD_pessoa", b =>
+                {
+                    b.Navigation("NPS_votacao");
+                });
+
             modelBuilder.Entity("ENPS.Models.NPS_Pesquisa", b =>
                 {
+                    b.Navigation("CAD_pessoa");
+
                     b.Navigation("NPS_votacao");
                 });
 #pragma warning restore 612, 618

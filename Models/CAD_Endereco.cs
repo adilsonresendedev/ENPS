@@ -5,7 +5,7 @@ namespace ENPS.Models
     public class CAD_endereco
     {
         public int Id { get; set; }
-        public bool Ativo { get; set; }
+        public bool Ativo { get; set; } = true;
         public bool Principal { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }
