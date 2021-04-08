@@ -23,7 +23,8 @@ namespace ENPS.Controllers
         public async Task<IActionResult> Inserir(InserirCAD_empresaDto inserirCAD_empresaDto)
         {
             _ServiceResponse<int> response = await _cAD_empresaService.Inserir(inserirCAD_empresaDto);
-            if(response.Data == 0) {
+            if (!response.Success)
+            {
                 return BadRequest(response);
             }
             return Ok(response);
@@ -33,7 +34,8 @@ namespace ENPS.Controllers
         public async Task<IActionResult> Alterar(AlterarCAD_empresaDto alterarCAD_empresaDto)
         {
             _ServiceResponse<CAD_empresaDTO> response = await _cAD_empresaService.Alterar(alterarCAD_empresaDto);
-            if(response.Data == null) {
+            if (!response.Success)
+            {
                 return BadRequest(response);
             }
             return Ok(response);
@@ -49,7 +51,8 @@ namespace ENPS.Controllers
         public async Task<IActionResult> Objeto(int id)
         {
             _ServiceResponse<CAD_empresaDTO> response = await _cAD_empresaService.Objeto(id);
-            if(response.Data == null) {
+            if (!response.Success)
+            {
                 return BadRequest(response);
             }
             return Ok(response);

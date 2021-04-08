@@ -9,7 +9,7 @@ namespace ENPS.DTOs.Empresa
         public string Fantasia { get; set; }
         public string RazaoSocial { get; set; }
         public string IE { get; set; }
-        public string CAD_CNPJ { get; set; }
+        public string CNPJ { get; set; }
         public string Email { get; set; }
     }
 }

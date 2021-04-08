@@ -40,7 +40,7 @@ namespace ENPS.Services.CAD_empresa
                     cAD_empresa.Fantasia = alterarCAD_empresaDto.Fantasia;
                     cAD_empresa.RazaoSocial = alterarCAD_empresaDto.RazaoSocial;
                     cAD_empresa.IE = alterarCAD_empresaDto.IE;
-                    cAD_empresa.CAD_CNPJ = alterarCAD_empresaDto.CAD_CNPJ;
+                    cAD_empresa.CNPJ = alterarCAD_empresaDto.CNPJ;
                     cAD_empresa.Email = alterarCAD_empresaDto.Email;
 
                     _context.CAD_Empresa.Update(cAD_empresa);
