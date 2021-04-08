@@ -14,6 +14,6 @@ namespace ENPS.DTOs
         public List<CAD_enderecoDTO> CAD_enderecoDTO { get; set; }
         public List<CAD_telefoneDTO> CAD_telefoneDTO { get; set; }
         public List<CAD_redeSocialDTO> CAD_redeSocialDTO { get; set; }
-        public CAD_usuarioDTO CAD_usuarioDTO { get; set; }
+        public CAD_usuarioInserirDTO CAD_usuarioDTO { get; set; }
     }
 }
