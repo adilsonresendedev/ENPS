@@ -15,6 +15,8 @@ using Microsoft.OpenApi.Models;
 using AutoMapper;
 using ENPS.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using ENPS.Services.CAD_empresa;
 
 namespace ENPS
 {
@@ -33,7 +35,11 @@ namespace ENPS
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+            
             services.AddScoped<IAutorizacaoService, AutorizacaoService>();
+            services.AddScoped<ICAD_empresaService, CAD_empresaService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ENPS", Version = "v1" });

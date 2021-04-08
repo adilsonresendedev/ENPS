@@ -42,11 +42,8 @@ namespace ENPS.Services.CAD_empresa
                     cAD_empresa.IE = alterarCAD_empresaDto.IE;
                     cAD_empresa.CAD_CNPJ = alterarCAD_empresaDto.CAD_CNPJ;
                     cAD_empresa.Email = alterarCAD_empresaDto.Email;
-                    cAD_empresa.CAD_enderedo = _mapper.Map<List<Models.CAD_endereco>>(alterarCAD_empresaDto.CAD_enderecoDtos);
-                    cAD_empresa.CAD_telefone = _mapper.Map<List<Models.CAD_Telefone>>(alterarCAD_empresaDto.CAD_telefoneDtos);
-                    cAD_empresa.CAD_redeSocial = _mapper.Map<List<Models.CAD_redeSocial>>(alterarCAD_empresaDto.CAD_redeSocialDtos);
 
-                    _context.Update(cAD_empresa);
+                    _context.CAD_Empresa.Update(cAD_empresa);
                     await _context.SaveChangesAsync();
 
                     response.Data = _mapper.Map<CAD_empresaDTO>(cAD_empresa);

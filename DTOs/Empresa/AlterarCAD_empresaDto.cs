@@ -11,8 +11,5 @@ namespace ENPS.DTOs.Empresa
         public string IE { get; set; }
         public string CAD_CNPJ { get; set; }
         public string Email { get; set; }
-        public List<CAD_enderecoDTO> CAD_enderecoDtos { get; set; }
-        public List<CAD_telefoneDTO> CAD_telefoneDtos { get; set; }
-        public List<CAD_redeSocialDTO> CAD_redeSocialDtos { get; set; }
     }
 }
