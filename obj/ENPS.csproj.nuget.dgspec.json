@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\ENPS\\ENPS.csproj": {}
+    "c:\\dev\\ENPS\\ENPS.csproj": {}
   },
   "projects": {
-    "C:\\dev\\ENPS\\ENPS.csproj": {
+    "c:\\dev\\ENPS\\ENPS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\ENPS\\ENPS.csproj",
+        "projectUniqueName": "c:\\dev\\ENPS\\ENPS.csproj",
         "projectName": "ENPS",
-        "projectPath": "C:\\dev\\ENPS\\ENPS.csproj",
+        "projectPath": "c:\\dev\\ENPS\\ENPS.csproj",
         "packagesPath": "C:\\Users\\thale\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\ENPS\\obj\\",
+        "outputPath": "c:\\dev\\ENPS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thale\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[9.5.3, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.4, )"
@@ -68,6 +72,10 @@
               "target": "Package",
               "version": "[5.0.4, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.10.0, )"
+            },
             "NUnit": {
               "target": "Package",
               "version": "[3.13.1, )"
@@ -75,6 +83,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.10.0, )"
             }
           },
           "imports": [
