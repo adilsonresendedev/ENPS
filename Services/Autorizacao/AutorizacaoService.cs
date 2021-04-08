@@ -31,18 +31,18 @@ namespace ENPS.Services.Autorizacao
             _iMapper = iMapper;
         }
 
-        private async Task<bool> Existe(CAD_usuarioDTO cAD_usuarioDTO)
+        private async Task<bool> Existe(CAD_usuarioInserirDTO cAD_usuarioDTO)
         {
             await Task.Delay(100);
             return false;
         }
 
-        public async Task<_ServiceResponse<string>> Login(CAD_usuarioDTO cAD_usuarioDTO)
+        public async Task<_ServiceResponse<string>> Login(CAD_usuarioInserirDTO cAD_usuarioDTO)
         {
             _ServiceResponse<string> _serviceResponse = new _ServiceResponse<string>();
             try
             {
-                CAD_pessoa cAD_pessoa = _dataContext.CAD_Pessoa.Include(x => x.CAD_email).FirstOrDefault(x => x.CAD_email.Email == cAD_usuarioDTO.Email);
+                CAD_pessoa cAD_pessoa = _dataContext.CAD_Pessoa.FirstOrDefault(x => x.Email == cAD_usuarioDTO.Email);
                 CAD_Usuario cAD_Usuario = await _dataContext.CAD_usuario.FirstOrDefaultAsync(x => x.CAD_pessoa.Id == cAD_pessoa.Id);
                 if (cAD_Usuario.Equals(null))
                 {
@@ -57,7 +57,7 @@ namespace ENPS.Services.Autorizacao
                     return _serviceResponse;
                 }
 
-                _serviceResponse.Data = CreateToken(cAD_usuarioDTO);
+                _serviceResponse.Data = CreateToken(cAD_Usuario);
             }
             catch (Exception ex)
             {
@@ -68,10 +68,10 @@ namespace ENPS.Services.Autorizacao
             return _serviceResponse;
         }
 
-        public async Task<_ServiceResponse<CAD_usuarioDTO>> Registrar(CAD_usuarioDTO cAD_usuarioDTO)
+        public async Task<_ServiceResponse<CAD_usuarioInserirDTO>> Registrar(CAD_usuarioInserirDTO cAD_usuarioDTO)
         {
             CAD_Usuario cAD_usuario = new CAD_Usuario();
-            _ServiceResponse<CAD_usuarioDTO> _serviceResponse = new _ServiceResponse<CAD_usuarioDTO>();
+            _ServiceResponse<CAD_usuarioInserirDTO> _serviceResponse = new _ServiceResponse<CAD_usuarioInserirDTO>();
             try
             {
                 if (await Existe(cAD_usuarioDTO))
@@ -87,15 +87,12 @@ namespace ENPS.Services.Autorizacao
                 cAD_usuario.CAD_pessoa = new CAD_pessoa
                 {
                     Nome = cAD_usuarioDTO.Nome,
-                    CAD_email = new CAD_email
-                    {
-                        Email = cAD_usuarioDTO.Email
-                    }
+                    Email = cAD_usuarioDTO.Email
                 };
 
                 await _dataContext.CAD_usuario.AddAsync(cAD_usuario);
                 await _dataContext.SaveChangesAsync();
-                
+
                 _serviceResponse.Data = cAD_usuarioDTO;
                 _serviceResponse.Message = UsuarioMensagem.SucessoCadastro();
                 return _serviceResponse;
@@ -125,11 +122,11 @@ namespace ENPS.Services.Autorizacao
             }
         }
 
-        private string CreateToken(CAD_usuarioDTO cAD_usuarioDTO)
+        private string CreateToken(CAD_Usuario cAD_Usuario)
         {
             List<Claim> claim = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, cAD_usuarioDTO.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, cAD_Usuario.Id.ToString()),
             };
 
             SymmetricSecurityKey systemSecurityKey = new SymmetricSecurityKey(
@@ -150,13 +147,13 @@ namespace ENPS.Services.Autorizacao
             return jwtSecurityTokenHandler.WriteToken(securityToken);
         }
 
-        public async Task<_ServiceResponse<bool>> Validar(CAD_usuarioDTO cAD_usuarioDTO)
+        public async Task<_ServiceResponse<bool>> Validar(CAD_usuarioInserirDTO cAD_usuarioInserirDTO)
         {
             _ServiceResponse<bool> _serviceResponse = new _ServiceResponse<bool>();
             try
             {
                 CAD_usuarioValidador cAD_usuarioValidador = new CAD_usuarioValidador();
-                ValidationResult validationResult = await cAD_usuarioValidador.ValidateAsync(cAD_usuarioDTO);
+                ValidationResult validationResult = await cAD_usuarioValidador.ValidateAsync(cAD_usuarioInserirDTO);
                 if (!validationResult.IsValid)
                 {
                     _serviceResponse.Message = validationResult.ToString();
@@ -168,6 +165,20 @@ namespace ENPS.Services.Autorizacao
             {
                 _serviceResponse.Message = ex.Message;
                 _serviceResponse.Data = false;
+            }
+
+            return _serviceResponse;
+        }
+
+        public async Task<_ServiceResponse<CAD_usuarioDTO>> Alterar(CAD_usuarioDTO cAD_usuarioDTO)
+        {
+            _ServiceResponse<CAD_usuarioDTO> _serviceResponse = new _ServiceResponse<CAD_usuarioDTO>();
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                _serviceResponse.Message = ex.Message;
             }
 
             return _serviceResponse;

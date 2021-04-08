@@ -8,7 +8,7 @@ namespace ENPS.AutoMapperProfiles
     {
         public AutoMapperProfile()
         {
-            CreateMap<CAD_usuarioDTO, CAD_Usuario>().ReverseMap();
+            CreateMap<CAD_usuarioInserirDTO, CAD_Usuario>().ReverseMap();
         }
     }
 }
