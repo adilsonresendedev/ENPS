@@ -16,7 +16,7 @@ namespace ENPS.Migrations
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     Fantasia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RazaoSocial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CAD_CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IE = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -223,7 +223,7 @@ namespace ENPS.Migrations
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CAD_CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NPS_PesquisaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

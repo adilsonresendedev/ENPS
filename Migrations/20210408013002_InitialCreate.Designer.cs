@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ENPS.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210408012644_InitialCreate")]
+    [Migration("20210408013002_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,7 +189,7 @@ namespace ENPS.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CAD_CNPJ")
+                    b.Property<string>("CNPJ")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -267,7 +267,7 @@ namespace ENPS.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CAD_CPF")
+                    b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
