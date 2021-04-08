@@ -6256,23 +6256,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Adilson\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\thale\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\GIT\\ENPS\\ENPS.csproj",
+      "projectUniqueName": "C:\\dev\\ENPS\\ENPS.csproj",
       "projectName": "ENPS",
-      "projectPath": "d:\\GIT\\ENPS\\ENPS.csproj",
-      "packagesPath": "C:\\Users\\Adilson\\.nuget\\packages\\",
-      "outputPath": "d:\\GIT\\ENPS\\obj\\",
+      "projectPath": "C:\\dev\\ENPS\\ENPS.csproj",
+      "packagesPath": "C:\\Users\\thale\\.nuget\\packages\\",
+      "outputPath": "C:\\dev\\ENPS\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Adilson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\thale\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
