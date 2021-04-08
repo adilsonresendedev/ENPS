@@ -92,7 +92,6 @@ C:\dev\ENPS\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
 C:\dev\ENPS\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\dev\ENPS\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\dev\ENPS\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\dev\ENPS\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\dev\ENPS\bin\Debug\net5.0\nunit.framework.dll
 C:\dev\ENPS\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\dev\ENPS\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -130,3 +129,4 @@ C:\dev\ENPS\obj\Debug\net5.0\ENPS.dll
 C:\dev\ENPS\obj\Debug\net5.0\ref\ENPS.dll
 C:\dev\ENPS\obj\Debug\net5.0\ENPS.pdb
 C:\dev\ENPS\obj\Debug\net5.0\ENPS.genruntimeconfig.cache
+C:\dev\ENPS\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

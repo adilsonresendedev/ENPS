@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Fc8UqiJ786wRM6paCbycUI/4/cZWDJ7vqNOLcXQX201JUkkl7YStyhCA6AFiXjxC5r4oE6KfyOJawjx5ELh+8w==",
+  "dgSpecHash": "p8cZGFVJMRY0s7wvLUx7EIpwgiYk54PetZyn76R9zJSnYlwDCP+uuWgLfS896zePW0WChwwPSqwTMbWBF9FZkQ==",
   "success": true,
-  "projectFilePath": "c:\\dev\\ENPS\\ENPS.csproj",
+  "projectFilePath": "C:\\dev\\ENPS\\ENPS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thale\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\thale\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

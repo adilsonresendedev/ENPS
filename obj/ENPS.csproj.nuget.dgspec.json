@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\dev\\ENPS\\ENPS.csproj": {}
+    "C:\\dev\\ENPS\\ENPS.csproj": {}
   },
   "projects": {
-    "c:\\dev\\ENPS\\ENPS.csproj": {
+    "C:\\dev\\ENPS\\ENPS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\dev\\ENPS\\ENPS.csproj",
+        "projectUniqueName": "C:\\dev\\ENPS\\ENPS.csproj",
         "projectName": "ENPS",
-        "projectPath": "c:\\dev\\ENPS\\ENPS.csproj",
+        "projectPath": "C:\\dev\\ENPS\\ENPS.csproj",
         "packagesPath": "C:\\Users\\thale\\.nuget\\packages\\",
-        "outputPath": "c:\\dev\\ENPS\\obj\\",
+        "outputPath": "C:\\dev\\ENPS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thale\\AppData\\Roaming\\NuGet\\NuGet.Config",
