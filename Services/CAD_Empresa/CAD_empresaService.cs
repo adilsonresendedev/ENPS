@@ -86,5 +86,24 @@ namespace ENPS.Services.CAD_empresa
 
             return response;
         }
+
+        public async Task<_ServiceResponse<CAD_empresaDTO>> Objeto(int Id)
+        {
+            _ServiceResponse<CAD_empresaDTO> response = new _ServiceResponse<CAD_empresaDTO>();
+            Models.CAD_empresa cAD_empresa = await _context.CAD_Empresa
+                .Include(e => e.CAD_Usuario)
+                .FirstOrDefaultAsync(e => e.Id == Id);
+
+            if(cAD_empresa.CAD_Usuario.Any(u => u.Id == GetUserId()))
+            {
+                response.Data = _mapper.Map<CAD_empresaDTO>(cAD_empresa);
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = EmpresaMensagem.EmpresaNaoEncontrada;
+            }
+            return response;
+        }
     }
 }

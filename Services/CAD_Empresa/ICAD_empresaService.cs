@@ -10,5 +10,6 @@ namespace ENPS.Services.CAD_empresa
         Task<_ServiceResponse<int>> Inserir(InserirCAD_empresaDto inserirCAD_empresaDto);
         Task<_ServiceResponse<CAD_empresaDTO>> Alterar(AlterarCAD_empresaDto alterarCAD_empresaDto);
         Task<_ServiceResponse<List<CAD_empresaDTO>>> Colecao();
+        Task<_ServiceResponse<CAD_empresaDTO>> Objeto(int Id);
     }
 }
