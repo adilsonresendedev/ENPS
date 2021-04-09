@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ENPS.Services.Autorizacao;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using AutoMapper;
 using ENPS.Data;
 using Microsoft.EntityFrameworkCore;
+using ENPS.Services.AutorizacaoServices;
+using ENPS.Repositorios.CAD_redeSocialRepos;
+using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace ENPS
 {
@@ -34,6 +27,7 @@ namespace ENPS
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IAutorizacaoService, AutorizacaoService>();
+            services.AddScoped<ICAD_redeSocialRepo, CAD_redeSocialRepo>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ENPS", Version = "v1" });
@@ -49,8 +43,6 @@ namespace ENPS
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ENPS v1"));
             }
-
-            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
