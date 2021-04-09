@@ -82,6 +82,8 @@ namespace ENPS.Services.CAD_empresa
             _ServiceResponse<int> response = new _ServiceResponse<int>();
             Models.CAD_empresa cAD_empresa = _mapper.Map<Models.CAD_empresa>(inserirCAD_empresaDto);
             cAD_empresa.CAD_Usuario.Add(await _context.CAD_usuario.FirstOrDefaultAsync(u => u.Id == GetUserId()));
+            // Verificar se endereco existe
+            // Se nao cadastra
             await _context.AddAsync(cAD_empresa);
 
             return response;
