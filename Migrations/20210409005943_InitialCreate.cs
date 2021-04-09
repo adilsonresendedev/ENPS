@@ -64,7 +64,6 @@ namespace ENPS.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    CEP = table.Column<int>(type: "int", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -187,22 +186,22 @@ namespace ENPS.Migrations
                     Numero = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CEP = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    COF_EstadoId = table.Column<int>(type: "int", nullable: true),
-                    COF_CidadeId = table.Column<int>(type: "int", nullable: true),
+                    COF_estadoId = table.Column<int>(type: "int", nullable: true),
+                    COF_cidadeId = table.Column<int>(type: "int", nullable: true),
                     COF_paisId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CAD_endereco", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CAD_endereco_COF_Cidade_COF_CidadeId",
-                        column: x => x.COF_CidadeId,
+                        name: "FK_CAD_endereco_COF_Cidade_COF_cidadeId",
+                        column: x => x.COF_cidadeId,
                         principalTable: "COF_Cidade",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_CAD_endereco_COF_Estado_COF_EstadoId",
-                        column: x => x.COF_EstadoId,
+                        name: "FK_CAD_endereco_COF_Estado_COF_estadoId",
+                        column: x => x.COF_estadoId,
                         principalTable: "COF_Estado",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -224,14 +223,14 @@ namespace ENPS.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NPS_PesquisaId = table.Column<int>(type: "int", nullable: true)
+                    NPS_pesquisaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CAD_Pessoa", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CAD_Pessoa_NPS_Pesquisa_NPS_PesquisaId",
-                        column: x => x.NPS_PesquisaId,
+                        name: "FK_CAD_Pessoa_NPS_Pesquisa_NPS_pesquisaId",
+                        column: x => x.NPS_pesquisaId,
                         principalTable: "NPS_Pesquisa",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -416,14 +415,14 @@ namespace ENPS.Migrations
                 column: "CAD_redeSocialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_endereco_COF_CidadeId",
+                name: "IX_CAD_endereco_COF_cidadeId",
                 table: "CAD_endereco",
-                column: "COF_CidadeId");
+                column: "COF_cidadeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_endereco_COF_EstadoId",
+                name: "IX_CAD_endereco_COF_estadoId",
                 table: "CAD_endereco",
-                column: "COF_EstadoId");
+                column: "COF_estadoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CAD_endereco_COF_paisId",
@@ -436,9 +435,9 @@ namespace ENPS.Migrations
                 column: "CAD_PessoaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAD_Pessoa_NPS_PesquisaId",
+                name: "IX_CAD_Pessoa_NPS_pesquisaId",
                 table: "CAD_Pessoa",
-                column: "NPS_PesquisaId");
+                column: "NPS_pesquisaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CAD_pessoaCAD_redeSocial_CAD_RedeSocialId",

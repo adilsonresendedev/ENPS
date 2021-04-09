@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ENPS.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210408013002_InitialCreate")]
+    [Migration("20210409005943_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,10 +225,10 @@ namespace ENPS.Migrations
                     b.Property<string>("CEP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("COF_CidadeId")
+                    b.Property<int?>("COF_cidadeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("COF_EstadoId")
+                    b.Property<int?>("COF_estadoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("COF_paisId")
@@ -248,9 +248,9 @@ namespace ENPS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("COF_CidadeId");
+                    b.HasIndex("COF_cidadeId");
 
-                    b.HasIndex("COF_EstadoId");
+                    b.HasIndex("COF_estadoId");
 
                     b.HasIndex("COF_paisId");
 
@@ -273,7 +273,7 @@ namespace ENPS.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NPS_PesquisaId")
+                    b.Property<int?>("NPS_pesquisaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -281,7 +281,7 @@ namespace ENPS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NPS_PesquisaId");
+                    b.HasIndex("NPS_pesquisaId");
 
                     b.ToTable("CAD_Pessoa");
                 });
@@ -307,7 +307,7 @@ namespace ENPS.Migrations
                     b.ToTable("CAD_redeSocial");
                 });
 
-            modelBuilder.Entity("ENPS.Models.COF_Cidade", b =>
+            modelBuilder.Entity("ENPS.Models.COF_cidade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -317,9 +317,6 @@ namespace ENPS.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<int>("CEP")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -328,7 +325,7 @@ namespace ENPS.Migrations
                     b.ToTable("COF_Cidade");
                 });
 
-            modelBuilder.Entity("ENPS.Models.COF_Estado", b =>
+            modelBuilder.Entity("ENPS.Models.COF_estado", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -364,7 +361,7 @@ namespace ENPS.Migrations
                     b.ToTable("COF_pais");
                 });
 
-            modelBuilder.Entity("ENPS.Models.NPS_Pesquisa", b =>
+            modelBuilder.Entity("ENPS.Models.NPS_pesquisa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -539,33 +536,33 @@ namespace ENPS.Migrations
 
             modelBuilder.Entity("ENPS.Models.CAD_endereco", b =>
                 {
-                    b.HasOne("ENPS.Models.COF_Cidade", "COF_Cidade")
+                    b.HasOne("ENPS.Models.COF_cidade", "COF_cidade")
                         .WithMany()
-                        .HasForeignKey("COF_CidadeId");
+                        .HasForeignKey("COF_cidadeId");
 
-                    b.HasOne("ENPS.Models.COF_Estado", "COF_Estado")
+                    b.HasOne("ENPS.Models.COF_estado", "COF_estado")
                         .WithMany()
-                        .HasForeignKey("COF_EstadoId");
+                        .HasForeignKey("COF_estadoId");
 
                     b.HasOne("ENPS.Models.COF_pais", "COF_pais")
                         .WithMany()
                         .HasForeignKey("COF_paisId");
 
-                    b.Navigation("COF_Cidade");
+                    b.Navigation("COF_cidade");
 
-                    b.Navigation("COF_Estado");
+                    b.Navigation("COF_estado");
 
                     b.Navigation("COF_pais");
                 });
 
             modelBuilder.Entity("ENPS.Models.CAD_pessoa", b =>
                 {
-                    b.HasOne("ENPS.Models.NPS_Pesquisa", null)
+                    b.HasOne("ENPS.Models.NPS_pesquisa", null)
                         .WithMany("CAD_pessoa")
-                        .HasForeignKey("NPS_PesquisaId");
+                        .HasForeignKey("NPS_pesquisaId");
                 });
 
-            modelBuilder.Entity("ENPS.Models.NPS_Pesquisa", b =>
+            modelBuilder.Entity("ENPS.Models.NPS_pesquisa", b =>
                 {
                     b.HasOne("ENPS.Models.CAD_empresa", "CAD_empresa")
                         .WithMany()
@@ -582,7 +579,7 @@ namespace ENPS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ENPS.Models.NPS_Pesquisa", "NPS_Pesquisa")
+                    b.HasOne("ENPS.Models.NPS_pesquisa", "NPS_Pesquisa")
                         .WithMany("NPS_votacao")
                         .HasForeignKey("nPS_PesquisaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -598,7 +595,7 @@ namespace ENPS.Migrations
                     b.Navigation("NPS_votacao");
                 });
 
-            modelBuilder.Entity("ENPS.Models.NPS_Pesquisa", b =>
+            modelBuilder.Entity("ENPS.Models.NPS_pesquisa", b =>
                 {
                     b.Navigation("CAD_pessoa");
 

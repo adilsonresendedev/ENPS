@@ -22,10 +22,10 @@ namespace ENPS.Data
         public DbSet<CAD_redeSocial> CAD_redeSocial { get; set; }
         public DbSet<CAD_Telefone> CAD_Telefone { get; set; }
         public DbSet<CAD_Usuario> CAD_usuario { get; set; }
-        public DbSet<COF_Estado> COF_Estado { get; set; }
-        public DbSet<COF_Cidade> COF_Cidade { get; set; }
+        public DbSet<COF_estado> COF_Estado { get; set; }
+        public DbSet<COF_cidade> COF_Cidade { get; set; }
         public DbSet<COF_pais> COF_pais { get; set; }
-        public DbSet<NPS_Pesquisa> NPS_Pesquisa { get; set; }
+        public DbSet<NPS_pesquisa> NPS_Pesquisa { get; set; }
         public DbSet<NPS_votacao> NPS_votacao { get; set; }
 
     }
