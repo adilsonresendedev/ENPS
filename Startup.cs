@@ -4,11 +4,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ENPS.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ENPS.Services.AutorizacaoServices;
+using ENPS.Services.CAD_EmpresaServices;
 using ENPS.Repositorios.CAD_redeSocialRepos;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Hosting;
-
 namespace ENPS
 {
     public class Startup
@@ -26,7 +29,23 @@ namespace ENPS
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+
             services.AddScoped<IAutorizacaoService, AutorizacaoService>();
+            services.AddScoped<ICAD_empresaService, CAD_empresaService>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII
+                        .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ICAD_redeSocialRepo, CAD_redeSocialRepo>();
             services.AddSwaggerGen(c =>
             {
@@ -47,6 +66,8 @@ namespace ENPS
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
