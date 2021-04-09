@@ -1,6 +1,5 @@
 using ENPS.DTOs;
-using ENPS.Services.Autorizacao;
-using Microsoft.AspNetCore.Authorization;
+using ENPS.Services.AutorizacaoServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
