@@ -9,7 +9,7 @@ namespace ENPS.Models
         public CAD_pessoa CAD_Pessoa { get; set; }
         [Key]
         public int nPS_PesquisaId { get; set; }
-        public NPS_Pesquisa NPS_Pesquisa { get; set; }
+        public NPS_pesquisa NPS_Pesquisa { get; set; }
         public int Nota { get; set; }
         public string LinkVotacao { get; set; }
     }

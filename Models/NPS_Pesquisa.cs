@@ -3,7 +3,7 @@ using System;
 
 namespace ENPS.Models
 {
-    public class NPS_Pesquisa
+    public class NPS_pesquisa
     {
         public int Id { get; set; }
         public bool Ativo { get; set; } = true;
