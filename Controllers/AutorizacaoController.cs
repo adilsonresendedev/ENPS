@@ -18,13 +18,13 @@ namespace ENPS.Controllers
         [HttpPost]
         public async Task<ActionResult> Registrar(CAD_usuarioInserirDTO cAD_usuarioDTO)
         {
-            _ServiceResponse<bool> _serviceResponseValidar = await _iAutorizacaoService.Validar(cAD_usuarioDTO);
+            ServiceResponse<bool> _serviceResponseValidar = await _iAutorizacaoService.Validar(cAD_usuarioDTO);
             if (!_serviceResponseValidar.Data || !_serviceResponseValidar.Success)
             {
                 return BadRequest(_serviceResponseValidar.Message);
             }
 
-            _ServiceResponse<CAD_usuarioInserirDTO> _ServiceResponseCAD_usuarioDTO = await _iAutorizacaoService.Registrar(cAD_usuarioDTO);
+            ServiceResponse<CAD_usuarioInserirDTO> _ServiceResponseCAD_usuarioDTO = await _iAutorizacaoService.Registrar(cAD_usuarioDTO);
             if (!_ServiceResponseCAD_usuarioDTO.Success)
             {
                 return BadRequest(_ServiceResponseCAD_usuarioDTO.Message);
@@ -36,7 +36,7 @@ namespace ENPS.Controllers
         [HttpPost(nameof(Login))]
         public async Task<ActionResult> Login(CAD_usuarioInserirDTO cAD_usuarioDTO)
         {
-            _ServiceResponse<string> _serviceResponse = await _iAutorizacaoService.Login(cAD_usuarioDTO);
+            ServiceResponse<string> _serviceResponse = await _iAutorizacaoService.Login(cAD_usuarioDTO);
             if (!_serviceResponse.Success)
             {
                 return BadRequest(_serviceResponse);
@@ -48,7 +48,7 @@ namespace ENPS.Controllers
         [HttpPost(nameof(Alterar))]
         public async Task<ActionResult> Alterar(CAD_usuarioDTO cAD_usuarioDTO)
         {
-            _ServiceResponse<CAD_usuarioDTO> _serviceResponse = await _iAutorizacaoService.Alterar(cAD_usuarioDTO);
+            ServiceResponse<CAD_usuarioDTO> _serviceResponse = await _iAutorizacaoService.Alterar(cAD_usuarioDTO);
             if (!_serviceResponse.Success)
             {
                 return BadRequest(_serviceResponse);

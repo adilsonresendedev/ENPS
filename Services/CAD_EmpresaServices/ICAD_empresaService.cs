@@ -7,9 +7,9 @@ namespace ENPS.Services.CAD_EmpresaServices
 {
     public interface ICAD_empresaService
     {
-        Task<_ServiceResponse<int>> Inserir(InserirCAD_empresaDto inserirCAD_empresaDto);
-        Task<_ServiceResponse<CAD_empresaDTO>> Alterar(AlterarCAD_empresaDto alterarCAD_empresaDto);
-        Task<_ServiceResponse<List<CAD_empresaDTO>>> Colecao();
-        Task<_ServiceResponse<CAD_empresaDTO>> Objeto(int Id);
+        Task<ServiceResponse<int>> Inserir(InserirCAD_empresaDto inserirCAD_empresaDto);
+        Task<ServiceResponse<CAD_empresaDTO>> Alterar(AlterarCAD_empresaDto alterarCAD_empresaDto);
+        Task<ServiceResponse<List<CAD_empresaDTO>>> Colecao();
+        Task<ServiceResponse<CAD_empresaDTO>> ObjetoEmpresa(int Id);
     }
 }

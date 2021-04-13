@@ -22,7 +22,7 @@ namespace ENPS.Controllers
         [HttpPost(nameof(Inserir))]
         public async Task<IActionResult> Inserir(InserirCAD_empresaDto inserirCAD_empresaDto)
         {
-            _ServiceResponse<int> response = await _cAD_empresaService.Inserir(inserirCAD_empresaDto);
+            ServiceResponse<int> response = await _cAD_empresaService.Inserir(inserirCAD_empresaDto);
             if (!response.Success)
             {
                 return BadRequest(response);
@@ -33,7 +33,7 @@ namespace ENPS.Controllers
         [HttpPut(nameof(Alterar))]
         public async Task<IActionResult> Alterar(AlterarCAD_empresaDto alterarCAD_empresaDto)
         {
-            _ServiceResponse<CAD_empresaDTO> response = await _cAD_empresaService.Alterar(alterarCAD_empresaDto);
+            ServiceResponse<CAD_empresaDTO> response = await _cAD_empresaService.Alterar(alterarCAD_empresaDto);
             if (!response.Success)
             {
                 return BadRequest(response);
@@ -50,7 +50,7 @@ namespace ENPS.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Objeto(int id)
         {
-            _ServiceResponse<CAD_empresaDTO> response = await _cAD_empresaService.Objeto(id);
+            ServiceResponse<CAD_empresaDTO> response = await _cAD_empresaService.ObjetoEmpresa(id);
             if (!response.Success)
             {
                 return BadRequest(response);

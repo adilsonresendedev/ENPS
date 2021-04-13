@@ -1,6 +1,9 @@
+using ENPS.Models;
+using ENPS.Repos.BaseRepos;
+
 namespace ENPS.Repositorios.CAD_enderecoRepos
 {
-    public class ICAD_enderecoRepo
+    public interface ICAD_enderecoRepo : IBaseRepo<CAD_endereco>
     {
         
     }
