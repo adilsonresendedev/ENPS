@@ -29,19 +29,25 @@ namespace ENPS.Repositorios.CAD_redeSocialRepos
             return cAD_redeSocialBanco;
         }
 
-        public Task<bool> Existe(int Id)
+        public async Task<bool> Existe(string  LinkRedeSocial)
         {
-            throw new System.NotImplementedException();
+            CAD_redeSocial cAD_redeSocial = await _dataContext.CAD_redeSocial.FirstOrDefaultAsync(x => x.LinkRedeSocial == LinkRedeSocial);
+            return (cAD_redeSocial != null);
         }
 
-        public Task<int> Inativar(int Id)
+        public async Task<int> Inativar(int Id)
         {
-            throw new System.NotImplementedException();
+            CAD_redeSocial cAD_redeSocial = await _dataContext.CAD_redeSocial.FirstOrDefaultAsync(x => x.Id == Id);
+            cAD_redeSocial.Ativo = false;
+            await _dataContext.SaveChangesAsync();
+            return cAD_redeSocial.Id;
         }
 
-        public Task<int> Inserir(CAD_redeSocial cAD_redeSocial)
+        public async Task<int> Inserir(CAD_redeSocial cAD_redeSocial)
         {
-            throw new System.NotImplementedException();
+            await _dataContext.CAD_redeSocial.AddAsync(cAD_redeSocial);
+            await _dataContext.SaveChangesAsync();
+            return cAD_redeSocial.Id;
         }
     }
 }
