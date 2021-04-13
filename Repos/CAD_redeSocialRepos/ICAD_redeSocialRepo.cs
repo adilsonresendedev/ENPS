@@ -5,7 +5,7 @@ namespace ENPS.Repositorios.CAD_redeSocialRepos
 {
     public interface ICAD_redeSocialRepo
     {
-        Task<bool> Existe(int Id);
+        Task<bool> Existe(string LinkRedeSocial);
 
         Task<int> Inserir(CAD_redeSocial cAD_redeSocial);
 

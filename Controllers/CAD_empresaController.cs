@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ENPS.DTOs;
 using ENPS.DTOs.Empresa;
-using ENPS.Services.CAD_empresa;
+using ENPS.Services.CAD_EmpresaServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
