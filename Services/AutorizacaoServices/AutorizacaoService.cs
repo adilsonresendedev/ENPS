@@ -37,9 +37,9 @@ namespace ENPS.Services.AutorizacaoServices
             return false;
         }
 
-        public async Task<_ServiceResponse<string>> Login(CAD_usuarioInserirDTO cAD_usuarioDTO)
+        public async Task<ServiceResponse<string>> Login(CAD_usuarioInserirDTO cAD_usuarioDTO)
         {
-            _ServiceResponse<string> _serviceResponse = new _ServiceResponse<string>();
+            ServiceResponse<string> _serviceResponse = new ServiceResponse<string>();
             try
             {
                 CAD_pessoa cAD_pessoa = _dataContext.CAD_Pessoa.FirstOrDefault(x => x.Email == cAD_usuarioDTO.Email);
@@ -68,10 +68,10 @@ namespace ENPS.Services.AutorizacaoServices
             return _serviceResponse;
         }
 
-        public async Task<_ServiceResponse<CAD_usuarioInserirDTO>> Registrar(CAD_usuarioInserirDTO cAD_usuarioDTO)
+        public async Task<ServiceResponse<CAD_usuarioInserirDTO>> Registrar(CAD_usuarioInserirDTO cAD_usuarioDTO)
         {
             CAD_Usuario cAD_usuario = new CAD_Usuario();
-            _ServiceResponse<CAD_usuarioInserirDTO> _serviceResponse = new _ServiceResponse<CAD_usuarioInserirDTO>();
+            ServiceResponse<CAD_usuarioInserirDTO> _serviceResponse = new ServiceResponse<CAD_usuarioInserirDTO>();
             try
             {
                 if (await Existe(cAD_usuarioDTO))
@@ -147,9 +147,9 @@ namespace ENPS.Services.AutorizacaoServices
             return jwtSecurityTokenHandler.WriteToken(securityToken);
         }
 
-        public async Task<_ServiceResponse<bool>> Validar(CAD_usuarioInserirDTO cAD_usuarioInserirDTO)
+        public async Task<ServiceResponse<bool>> Validar(CAD_usuarioInserirDTO cAD_usuarioInserirDTO)
         {
-            _ServiceResponse<bool> _serviceResponse = new _ServiceResponse<bool>();
+            ServiceResponse<bool> _serviceResponse = new ServiceResponse<bool>();
             try
             {
                 CAD_usuarioValidador cAD_usuarioValidador = new CAD_usuarioValidador();
@@ -170,9 +170,9 @@ namespace ENPS.Services.AutorizacaoServices
             return _serviceResponse;
         }
 
-        public async Task<_ServiceResponse<CAD_usuarioDTO>> Alterar(CAD_usuarioDTO cAD_usuarioDTO)
+        public async Task<ServiceResponse<CAD_usuarioDTO>> Alterar(CAD_usuarioDTO cAD_usuarioDTO)
         {
-            _ServiceResponse<CAD_usuarioDTO> _serviceResponse = new _ServiceResponse<CAD_usuarioDTO>();
+            ServiceResponse<CAD_usuarioDTO> _serviceResponse = new ServiceResponse<CAD_usuarioDTO>();
             try
             {
                 await Task.Delay(1);

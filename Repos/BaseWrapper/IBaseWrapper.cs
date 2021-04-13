@@ -15,17 +15,17 @@ namespace ENPS.Repos.BaseWrapper
 {
     public interface IBaseWrapper
     {
-        ICAD_empresaRepo iCAD_empresaRepo { get; }
-        ICAD_enderecoRepo iCAD_enderecoRepo { get; }
-        ICAD_pessoaRepo iCAD_pessoaRepo { get; }
-        ICAD_redeSocialRepo iCAD_redeSocialRepo { get; }
-        ICAD_telefoneRepo iCAD_telefoneRepo { get; }
-        ICAD_usuarioRepo iCAD_usuarioRepo { get; }
-        ICOF_cidadeRepo iCOF_cidadeRepo { get; }
-        ICOF_estadoRepo iCOF_estadoRepo { get; }
-        ICOF_paisRepo iCOF_paisRepo { get; }
-        INPS_pesquisaRepo iNPS_pesquisaRepo { get; }
-        INPS_votacaoRepo iNPS_votacaoRepo { get; }
+        ICAD_empresaRepo ICAD_empresaRepo { get; }
+        ICAD_enderecoRepo ICAD_enderecoRepo { get; }
+        ICAD_pessoaRepo ICAD_pessoaRepo { get; }
+        ICAD_redeSocialRepo ICAD_redeSocialRepo { get; }
+        ICAD_telefoneRepo ICAD_telefoneRepo { get; }
+        ICAD_usuarioRepo ICAD_usuarioRepo { get; }
+        ICOF_cidadeRepo ICOF_cidadeRepo { get; }
+        ICOF_estadoRepo ICOF_estadoRepo { get; }
+        ICOF_paisRepo ICOF_paisRepo { get; }
+        INPS_pesquisaRepo INPS_pesquisaRepo { get; }
+        INPS_votacaoRepo INPS_votacaoRepo { get; }
         Task Save();
     }
 }
