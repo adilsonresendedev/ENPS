@@ -21,13 +21,13 @@ namespace ENPS.Services.AutorizacaoServices
 {
     public class AutorizacaoService : IAutorizacaoService
     {
-        private readonly IConfiguration _iConfiguration;
+        private readonly IConfiguration _configuration;
         private readonly IMapper _iMapper;
         private readonly DataContext _dataContext;
         public AutorizacaoService(IConfiguration iConfiguration, IMapper iMapper, DataContext dataContext)
         {
             _dataContext = dataContext;
-            _iConfiguration = iConfiguration;
+            _configuration = iConfiguration;
             _iMapper = iMapper;
         }
 
@@ -44,7 +44,7 @@ namespace ENPS.Services.AutorizacaoServices
             {
                 CAD_pessoa cAD_pessoa = _dataContext.CAD_Pessoa.FirstOrDefault(x => x.Email == cAD_usuarioDTO.Email);
                 CAD_Usuario cAD_Usuario = await _dataContext.CAD_usuario.FirstOrDefaultAsync(x => x.CAD_pessoa.Id == cAD_pessoa.Id);
-                if (cAD_Usuario.Equals(null))
+                if (cAD_Usuario is null)
                 {
                     _serviceResponse.Success = false;
                     _serviceResponse.Message = UsuarioMensagem.UsuarioNaoEncontrado();
@@ -127,10 +127,11 @@ namespace ENPS.Services.AutorizacaoServices
             List<Claim> claim = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, cAD_Usuario.Id.ToString()),
+                new Claim(ClaimTypes.Name, cAD_Usuario.CAD_pessoa.Nome),
             };
 
             SymmetricSecurityKey systemSecurityKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_iConfiguration.GetSection("AppSettings").GetSection("Token").Value)
+                Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value)
             );
 
             SigningCredentials signingCredentials = new SigningCredentials(systemSecurityKey, SecurityAlgorithms.HmacSha512Signature);

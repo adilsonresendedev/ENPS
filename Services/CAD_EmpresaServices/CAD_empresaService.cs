@@ -35,8 +35,8 @@ namespace ENPS.Services.CAD_EmpresaServices
             ServiceResponse<CAD_empresaDTO> response = new ServiceResponse<CAD_empresaDTO>();
             try
             {
-                CAD_empresa cAD_empresa = await _wrapper.ICAD_empresaRepo.ObjetoComDependencias(alterarCAD_empresaDto.Id);
-                if (cAD_empresa.CAD_Usuario.Any(u => u.Id == GetUserId()))
+                CAD_empresa cAD_empresa = await _wrapper.CAD_empresaRepo.ObjetoComDependencias(alterarCAD_empresaDto.Id);
+                if (cAD_empresa.CAD_usuario.Any(u => u.Id == GetUserId()))
                 {
                     cAD_empresa.Ativo = alterarCAD_empresaDto.Ativo;
                     cAD_empresa.Fantasia = alterarCAD_empresaDto.Fantasia;
@@ -45,7 +45,7 @@ namespace ENPS.Services.CAD_EmpresaServices
                     cAD_empresa.CNPJ = alterarCAD_empresaDto.CNPJ;
                     cAD_empresa.Email = alterarCAD_empresaDto.Email;
 
-                    cAD_empresa = _wrapper.ICAD_empresaRepo.Alterar(cAD_empresa);
+                    cAD_empresa = _wrapper.CAD_empresaRepo.Alterar(cAD_empresa);
                     await _wrapper.Save();
 
                     response.Data = _mapper.Map<CAD_empresaDTO>(cAD_empresa);
@@ -68,7 +68,7 @@ namespace ENPS.Services.CAD_EmpresaServices
         public async Task<ServiceResponse<List<CAD_empresaDTO>>> Colecao()
         {
             ServiceResponse<List<CAD_empresaDTO>> response = new ServiceResponse<List<CAD_empresaDTO>>();
-            List<CAD_empresa> cAD_empresaColecao = await _wrapper.ICAD_empresaRepo.ListarEmpresasPorUsuario(GetUserId());
+            List<CAD_empresa> cAD_empresaColecao = await _wrapper.CAD_empresaRepo.ListarTodasEmpresas();
             response.Data = _mapper.Map<List<CAD_empresaDTO>>(cAD_empresaColecao);
             return response;
         }
@@ -78,8 +78,8 @@ namespace ENPS.Services.CAD_EmpresaServices
             ServiceResponse<int> response = new ServiceResponse<int>();
             CAD_empresa cAD_empresa = _mapper.Map<CAD_empresa>(inserirCAD_empresaDto);
 
-            cAD_empresa.CAD_Usuario.Add(await _wrapper.ICAD_usuarioRepo.Objeto(GetUserId()));
-            cAD_empresa = _wrapper.ICAD_empresaRepo.Inserir(cAD_empresa);
+            cAD_empresa.CAD_usuario.Add(await _wrapper.ICAD_usuarioRepo.Objeto(GetUserId()));
+            cAD_empresa = _wrapper.CAD_empresaRepo.Inserir(cAD_empresa);
             await _wrapper.Save();
 
             return response;
@@ -88,9 +88,9 @@ namespace ENPS.Services.CAD_EmpresaServices
         public async Task<ServiceResponse<CAD_empresaDTO>> ObjetoEmpresa(int empresaId)
         {
             ServiceResponse<CAD_empresaDTO> response = new ServiceResponse<CAD_empresaDTO>();
-            CAD_empresa cAD_empresa = await _wrapper.ICAD_empresaRepo.ObjetoComDependencias(empresaId);
+            CAD_empresa cAD_empresa = await _wrapper.CAD_empresaRepo.ObjetoComDependencias(empresaId);
 
-            if (cAD_empresa.CAD_Usuario.Any(u => u.Id == GetUserId()))
+            if (cAD_empresa.CAD_usuario.Any(u => u.Id == GetUserId()))
             {
                 response.Data = _mapper.Map<CAD_empresaDTO>(cAD_empresa);
             }

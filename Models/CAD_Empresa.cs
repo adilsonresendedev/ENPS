@@ -11,9 +11,9 @@ namespace ENPS.Models
         public string CNPJ { get; set; }
         public string Email { get; set; }
         public string IE { get; set; }
-        public List<CAD_endereco> CAD_enderedo { get; set; }
-        public List<CAD_Telefone> CAD_telefone { get; set; }
+        public List<CAD_endereco> CAD_endereco { get; set; }
+        public List<CAD_telefone> CAD_telefone { get; set; }
         public List<CAD_redeSocial> CAD_redeSocial { get; set; }
-        public List<CAD_Usuario> CAD_Usuario { get; set; }
+        public List<CAD_Usuario> CAD_usuario { get; set; }
     }
 }

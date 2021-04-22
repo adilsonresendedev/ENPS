@@ -12,6 +12,10 @@ using ENPS.Services.CAD_EmpresaServices;
 using ENPS.Repositorios.CAD_redeSocialRepos;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Hosting;
+using ENPS.Repos.BaseWrapper;
+using ENPS.Util;
+using System.Text;
+
 namespace ENPS
 {
     public class Startup
@@ -32,13 +36,15 @@ namespace ENPS
 
             services.AddScoped<IAutorizacaoService, AutorizacaoService>();
             services.AddScoped<ICAD_empresaService, CAD_empresaService>();
+            
+            services.ConfigureRepositoryWrapper();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
                         .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                     ValidateIssuer = false,
                     ValidateAudience = false

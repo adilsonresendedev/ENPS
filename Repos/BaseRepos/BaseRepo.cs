@@ -29,9 +29,9 @@ namespace ENPS.Repos.BaseRepos
         public IQueryable<T> ListarTodos()
         {
             return _dataContext.Set<T>()
-            .AsNoTracking();
+                .AsNoTracking();
         }
-        
+
         public IQueryable<T> ListarTodos(Expression<Func<T, bool>> expression)
         {
             return _dataContext.Set<T>()

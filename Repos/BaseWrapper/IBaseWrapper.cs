@@ -15,7 +15,7 @@ namespace ENPS.Repos.BaseWrapper
 {
     public interface IBaseWrapper
     {
-        ICAD_empresaRepo ICAD_empresaRepo { get; }
+        ICAD_empresaRepo CAD_empresaRepo { get; }
         ICAD_enderecoRepo ICAD_enderecoRepo { get; }
         ICAD_pessoaRepo ICAD_pessoaRepo { get; }
         ICAD_redeSocialRepo ICAD_redeSocialRepo { get; }
