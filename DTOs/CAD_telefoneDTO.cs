@@ -8,6 +8,6 @@ namespace ENPS.DTOs
         public int CodigoPais { get; set; }
         public int CodigoEstado { get; set; }
         public int Numero { get; set; }
-        public string NumeroFormatado { get { return $"{CodigoPais.ToString().PadLeft(2, '0')}{CodigoEstado.ToString().PadLeft(2, '0')}{Numero.ToString().PadLeft(9, '0')}"; } }
+        public string NumeroFormatado { get { return $"{CodigoPais:00}{CodigoEstado:00}{Numero:000000000)}"; } }
     }
 }

@@ -1,16 +1,12 @@
 using System.Threading.Tasks;
 using ENPS.Models;
+using ENPS.Repos.BaseRepos;
 
 namespace ENPS.Repositorios.CAD_redeSocialRepos
 {
     public interface ICAD_redeSocialRepo
-    {
+    { 
         Task<bool> Existe(string LinkRedeSocial);
-
-        Task<int> Inserir(CAD_redeSocial cAD_redeSocial);
-
-        Task<CAD_redeSocial> Alterar(CAD_redeSocial cAD_redeSocial);
-
         Task<int> Inativar(int Id);
     }
 }
