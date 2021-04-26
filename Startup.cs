@@ -32,6 +32,7 @@ namespace ENPS
 
             services.AddScoped<IAutorizacaoService, AutorizacaoService>();
             services.AddScoped<ICAD_empresaService, CAD_empresaService>();
+            services.AddScoped<ICAD_redeSocialRepo, CAD_redeSocialRepo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -46,7 +47,6 @@ namespace ENPS
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<ICAD_redeSocialRepo, CAD_redeSocialRepo>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ENPS", Version = "v1" });

@@ -15,5 +15,6 @@ namespace ENPS.Models
         public List<CAD_Telefone> CAD_telefone { get; set; }
         public List<CAD_redeSocial> CAD_redeSocial { get; set; }
         public List<CAD_Usuario> CAD_Usuario { get; set; }
+        public List<CAD_pessoa> CAD_pessoa { get; set; }
     }
 }

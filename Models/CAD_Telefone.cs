@@ -4,7 +4,7 @@ namespace ENPS.Models
 {
     public class CAD_Telefone
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public bool Ativo { get; set; } = true;
         public bool Princial { get; set; }
         public int CodigoPais { get; set; }
