@@ -34,6 +34,7 @@ namespace ENPS
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddScoped<IBaseWrapper, BaseWrapper>();
             services.AddScoped<IAutorizacaoService, AutorizacaoService>();
             services.AddScoped<ICAD_empresaService, CAD_empresaService>();
             services.AddScoped<ICAD_redeSocialRepo, CAD_redeSocialRepo>();
