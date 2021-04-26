@@ -14,7 +14,7 @@ namespace ENPS.Models
         public List<CAD_endereco> CAD_endereco { get; set; }
         public List<CAD_telefone> CAD_telefone { get; set; }
         public List<CAD_redeSocial> CAD_redeSocial { get; set; }
-        public List<CAD_Usuario> CAD_Usuario { get; set; }
+        public CAD_Usuario CAD_Usuario { get; set; }
         public List<CAD_pessoa> CAD_pessoa { get; set; }
     }
 }
