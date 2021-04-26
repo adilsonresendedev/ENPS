@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ENPS.Models
 {
-    public class CAD_Telefone
+    public class CAD_telefone
     {
         public int Id { get; set; }
         public bool Ativo { get; set; } = true;
@@ -10,7 +10,7 @@ namespace ENPS.Models
         public int CodigoPais { get; set; }
         public int CodigoEstado { get; set; }
         public int Numero { get; set; }
-        public List<CAD_empresa> CAD_Empresa { get; set; }
-        public List<CAD_pessoa> CAD_Pessoa { get; set; }
+        public List<CAD_empresa> CAD_empresa { get; set; }
+        public List<CAD_pessoa> CAD_pessoa { get; set; }
     }
 }

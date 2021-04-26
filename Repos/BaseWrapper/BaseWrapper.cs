@@ -16,13 +16,18 @@ namespace ENPS.Repos.BaseWrapper
 {
     public class BaseWrapper : IBaseWrapper
     {
-        private DataContext _dataContext;
+        private readonly DataContext _context;
+        public BaseWrapper(DataContext context)
+        {
+            _context = context;
+        }
+
         private ICAD_empresaRepo _iCAD_empresaRepo;
-        public ICAD_empresaRepo ICAD_empresaRepo
+        public ICAD_empresaRepo CAD_empresaRepo
         {
             get
             {
-                return _iCAD_empresaRepo ?? new CAD_empresaRepo(_dataContext);
+                return _iCAD_empresaRepo ?? new CAD_empresaRepo(_context);
             }
         }
 
@@ -31,7 +36,7 @@ namespace ENPS.Repos.BaseWrapper
         {
             get
             {
-                return _iCAD_enderecoRepo ?? new CAD_enderecoRepo(_dataContext);
+                return _iCAD_enderecoRepo ?? new CAD_enderecoRepo(_context);
             }
         }
 
@@ -80,7 +85,7 @@ namespace ENPS.Repos.BaseWrapper
         {
             get
             {
-                return _iCAD_usuarioRepo ?? new CAD_usuarioRepo(_dataContext);
+                return _iCAD_usuarioRepo ?? new CAD_usuarioRepo(_context);
             }
         }
 

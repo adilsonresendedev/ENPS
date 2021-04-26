@@ -15,7 +15,7 @@ namespace ENPS.Models
         public COF_estado COF_estado { get; set; }
         public COF_cidade COF_cidade { get; set; }
         public COF_pais COF_pais { get; set; }
-        public List<CAD_empresa> CAD_Empresa { get; set; }
-        public List<CAD_pessoa> CAD_Pessoa { get; set; }
+        public List<CAD_empresa> CAD_empresa { get; set; }
+        public List<CAD_pessoa> CAD_pessoa { get; set; }
     }
 }

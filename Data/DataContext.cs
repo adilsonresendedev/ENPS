@@ -20,7 +20,7 @@ namespace ENPS.Data
         public DbSet<CAD_endereco> CAD_endereco { get; set; }
         public DbSet<CAD_pessoa> CAD_Pessoa { get; set; }
         public DbSet<CAD_redeSocial> CAD_redeSocial { get; set; }
-        public DbSet<CAD_Telefone> CAD_Telefone { get; set; }
+        public DbSet<CAD_telefone> CAD_Telefone { get; set; }
         public DbSet<CAD_Usuario> CAD_usuario { get; set; }
         public DbSet<COF_estado> COF_Estado { get; set; }
         public DbSet<COF_cidade> COF_Cidade { get; set; }

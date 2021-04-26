@@ -13,7 +13,7 @@ namespace ENPS.AutoMapperProfiles
             CreateMap<InserirCAD_empresaDto, CAD_empresa>();
             CreateMap<CAD_enderecoDTO, CAD_endereco>();
             CreateMap<CAD_redeSocialDTO, CAD_redeSocial>();
-            CreateMap<CAD_telefoneDTO, CAD_Telefone>();
+            CreateMap<CAD_telefoneDTO, CAD_telefone>();
         }
     }
 }

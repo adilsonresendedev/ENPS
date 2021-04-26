@@ -18,7 +18,7 @@ namespace ENPS.Repositorios.CAD_empresaRepos
 
         public async Task<List<CAD_empresa>> ListarEmpresasPorUsuario(int userId)
         {
-            return await ListarTodos(x => x.CAD_Usuario.Any(u => u.Id == userId))
+            return await ListarTodos(x => x.CAD_usuario.Any(u => u.Id == userId))
                 .ToListAsync();
         }
 
@@ -37,10 +37,10 @@ namespace ENPS.Repositorios.CAD_empresaRepos
         public async Task<CAD_empresa> ObjetoComDependencias(int empresaId)
         {
             return await ListarTodos(x => x.Id == empresaId)
-                .Include(x => x.CAD_enderedo)
+                .Include(x => x.CAD_endereco)
                 .Include(x => x.CAD_redeSocial)
                 .Include(x => x.CAD_telefone)
-                .Include(x => x.CAD_Usuario)
+                .Include(x => x.CAD_usuario)
                 .FirstOrDefaultAsync();
         }
     }
